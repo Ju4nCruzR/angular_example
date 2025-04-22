@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CaravanaService } from '../caravana.service';
-import { CaravanaDetalleDto } from '../dto/caravana-detalle-dto';
+import { CaravanaDetalleDto } from '../../dto/caravana/caravana-detalle-dto';
 import { Router } from '@angular/router';
 
 @Component({

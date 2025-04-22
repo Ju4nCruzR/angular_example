@@ -12,7 +12,10 @@ import { CiudadFormComponent } from './ciudad/ciudad-form/ciudad-form.component'
 import { CiudadProductosComponent } from './ciudad/ciudad-productos/ciudad-productos.component';
 import { CiudadServiciosComponent } from './ciudad/ciudad-servicios/ciudad-servicios.component';
 import { CiudadRutasComponent } from './ciudad/ciudad-rutas/ciudad-rutas.component';
-
+import { JuegoListComponent } from './juego/juego-list/juego-list.component';
+import { JuegoViewComponent } from './juego/juego-view/juego-view.component';
+import { JuegoFormComponent } from './juego/juego-form/juego-form.component';
+import { JuegoEditComponent } from './juego/juego-edit/juego-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'caravanas', pathMatch: 'full' },
@@ -28,8 +31,11 @@ export const routes: Routes = [
   { path: 'ciudad-form', component: CiudadFormComponent },
   { path: 'ciudad/:id/productos', component: CiudadProductosComponent },
   { path: 'ciudad/:id/servicios', component: CiudadServiciosComponent },
-  { path: 'ciudad/:id/rutas', component: CiudadRutasComponent }
-
+  { path: 'ciudad/:id/rutas', component: CiudadRutasComponent },
+  { path: 'juegos', component: JuegoListComponent },
+  { path: 'juego/:id', component: JuegoViewComponent },
+  { path: 'juego-form', component: JuegoFormComponent }
+  { path: 'juego/:id/editar', component: JuegoEditComponent }
 
 
 ];

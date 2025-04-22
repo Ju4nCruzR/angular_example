@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CaravanaFormularioDto } from '../dto/caravana-formulario-dto';
+import { CaravanaFormularioDto } from '../../dto/caravana/caravana-formulario-dto';
 import { CaravanaService } from '../caravana.service';
 import { Router } from '@angular/router';
 

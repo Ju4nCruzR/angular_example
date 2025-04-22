@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CaravanaProductoDto } from '../dto/caravana-producto-dto';
+import { CaravanaProductoDto } from '../../dto/caravana/caravana-producto-dto';
 
 @Component({
   selector: 'app-caravana-productos',

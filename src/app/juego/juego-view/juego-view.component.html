@@ -1,1 +1,33 @@
-<p>juego-view works!</p>
+<h2>Detalle del Juego</h2>
+
+<div *ngIf="juego">
+  <p><strong>ID:</strong> {{ juego.id }}</p>
+  <p><strong>Tiempo límite:</strong> {{ juego.tiempoLimiteDeJuego }} min</p>
+  <p><strong>Tiempo transcurrido:</strong> {{ juego.tiempoTranscurridoDeJuego }} min</p>
+  <p><strong>Ganancia mínima:</strong> {{ juego.nivelMinimoGananciasJuego }}</p>
+
+  <hr />
+
+  <h3>Caravanas</h3>
+  <ul *ngIf="juego.caravanas.length > 0; else sinCaravanas">
+    <li *ngFor="let caravana of juego.caravanas">
+      {{ caravana.nombreCaravana }} (Ciudad actual: {{ caravana.ciudadActual }})
+    </li>
+  </ul>
+  <ng-template #sinCaravanas><p>No hay caravanas asociadas.</p></ng-template>
+
+  <h3>Jugadores</h3>
+  <ul *ngIf="juego.jugadores.length > 0; else sinJugadores">
+    <li *ngFor="let jugador of juego.jugadores">
+      {{ jugador.nombreJugador }} - Rol: {{ jugador.rol }}
+    </li>
+  </ul>
+  <ng-template #sinJugadores><p>No hay jugadores asociados.</p></ng-template>
+
+  <hr />
+
+  <a [routerLink]="['/juego', juego.id, 'editar']">✏️ Editar Juego</a>
+  <a routerLink="/juegos">
+    <button type="button" class="boton-volver">🔙 Volver a la lista</button>
+  </a>
+</div>

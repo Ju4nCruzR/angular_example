@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CaravanaDto } from '../dto/caravana-dto';
+import { CaravanaDto } from '../../dto/caravana/caravana-dto';
 import { CaravanaService } from '../caravana.service';
 
 @Component({

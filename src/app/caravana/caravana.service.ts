@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CaravanaDetalleDto } from './dto/caravana-detalle-dto';
-import { CaravanaDto } from './dto/caravana-dto';
+import { CaravanaDetalleDto } from '../dto/caravana/caravana-detalle-dto';
+import { CaravanaDto } from '../dto/caravana/caravana-dto';
 
 @Injectable({
   providedIn: 'root'

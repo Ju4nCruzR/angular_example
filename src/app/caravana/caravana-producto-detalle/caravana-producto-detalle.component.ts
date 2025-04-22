@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CaravanaService } from '../caravana.service';
-import { CaravanaProductoDto } from '../dto/caravana-producto-dto';
+import { CaravanaProductoDto } from '../../dto/caravana/caravana-producto-dto';
 
 @Component({
   selector: 'app-caravana-producto-detalle',

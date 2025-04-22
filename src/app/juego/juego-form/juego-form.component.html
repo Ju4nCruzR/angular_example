@@ -1,1 +1,24 @@
+<h2>Crear Juego</h2>
+
+<form (ngSubmit)="crearJuego()">
+  <label for="limite">Tiempo límite (min):</label>
+  <input id="limite" type="number" [(ngModel)]="formulario.tiempoLimiteDeJuego" name="tiempoLimiteDeJuego" required placeholder="Ej: 60" />
+
+  <label for="transcurrido">Tiempo transcurrido (min):</label>
+  <input id="transcurrido" type="number" [(ngModel)]="formulario.tiempoTranscurridoDeJuego" name="tiempoTranscurridoDeJuego" placeholder="Ej: 0" />
+
+  <label for="ganancia">Nivel mínimo de ganancias:</label>
+  <input id="ganancia" type="number" [(ngModel)]="formulario.nivelMinimoGananciasJuego" name="nivelMinimoGananciasJuego" required placeholder="Ej: 1000" />
+
+  <label for="caravanas">IDs de caravanas asociadas (separadas por coma):</label>
+  <input id="caravanas" type="text" [(ngModel)]="caravanaIdsTexto" name="caravanaIds" placeholder="Ej: 1,2,3" />
+
+  <button type="submit">Crear Juego</button>
+</form>
+
+<p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+
+<a routerLink="/juegos">
+  <button type="button" class="boton-volver">🔙 Volver a la lista</button>
+</a>
 <p>juego-form works!</p>
