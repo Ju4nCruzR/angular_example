@@ -16,6 +16,10 @@ import { JuegoListComponent } from './juego/juego-list/juego-list.component';
 import { JuegoViewComponent } from './juego/juego-view/juego-view.component';
 import { JuegoFormComponent } from './juego/juego-form/juego-form.component';
 import { JuegoEditComponent } from './juego/juego-edit/juego-edit.component';
+import { JugadorListComponent } from './jugador/jugador-list/jugador-list.component';
+import { JugadorViewComponent } from './jugador/jugador-view/jugador-view.component';
+import { JugadorFormComponent } from './jugador/jugador-form/jugador-form.component';
+import { JugadorEditComponent } from './jugador/jugador-edit/jugador-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'caravanas', pathMatch: 'full' },
@@ -34,8 +38,11 @@ export const routes: Routes = [
   { path: 'ciudad/:id/rutas', component: CiudadRutasComponent },
   { path: 'juegos', component: JuegoListComponent },
   { path: 'juego/:id', component: JuegoViewComponent },
-  { path: 'juego-form', component: JuegoFormComponent }
-  { path: 'juego/:id/editar', component: JuegoEditComponent }
-
+  { path: 'juego-form', component: JuegoFormComponent },
+  { path: 'juego/:id/editar', component: JuegoEditComponent },
+  { path: 'jugadores', component: JugadorListComponent },
+  { path: 'jugador/:id', component: JugadorViewComponent },
+  { path: 'jugador-form', component: JugadorFormComponent }
+  { path: 'jugador/:id/editar', component: JugadorEditComponent }
 
 ];
