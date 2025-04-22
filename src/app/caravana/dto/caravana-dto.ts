@@ -1,11 +1,10 @@
 export class CaravanaDto {
-    constructor(
-        public id: number,
-        public nombreCaravana: string,
-        public velocidadCaravana: number,
-        public capacidadMaximaCargaCaravana: number,
-        public dineroDisponibleCaravana: number,
-        public puntosDeVidaCaravana: number,
-        public nombreCiudadActual: string
-    ) {}
+    id: number = 0;
+    nombreCaravana: string = '';
+    velocidadCaravana: number = 0;
+    capacidadMaximaCargaCaravana: number = 0;
+    dineroDisponibleCaravana: number = 0;
+    puntosDeVidaCaravana: number = 0;
+    nombreCiudadActual: string = '';
 }
+

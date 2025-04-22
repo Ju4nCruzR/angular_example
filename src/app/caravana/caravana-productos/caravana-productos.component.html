@@ -1,1 +1,10 @@
-<p>caravana-productos works!</p>
+<div>
+    <h2>Productos en la Caravana</h2>
+  
+    <ul>
+      <li *ngFor="let producto of productos">
+        {{ producto.nombreProducto }} — Stock: {{ producto.stockEnCaravana }} — Peso total: {{ producto.pesoTotal }}
+      </li>
+    </ul>
+  </div>
+  

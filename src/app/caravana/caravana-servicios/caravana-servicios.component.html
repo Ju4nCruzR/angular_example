@@ -1,1 +1,11 @@
-<p>caravana-servicios works!</p>
+<div>
+    <h2>Servicios disponibles para esta Caravana</h2>
+  
+    <ul>
+      <li *ngFor="let servicio of servicios">
+        {{ servicio.tipo }} — Precio: {{ servicio.precio }}
+        <button (click)="aplicar(servicio.id)">Aplicar</button>
+      </li>
+    </ul>
+  </div>
+  

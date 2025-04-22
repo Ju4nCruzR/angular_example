@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CaravanaProductoDto } from '../dto/caravana-producto-dto';
 
 @Component({
   selector: 'app-caravana-productos',
-  standalone: true,
-  imports: [],
-  templateUrl: './caravana-productos.component.html',
-  styleUrl: './caravana-productos.component.css'
+  templateUrl: './caravana-productos.component.html'
 })
 export class CaravanaProductosComponent {
-
+  @Input() productos: CaravanaProductoDto[] = [];
 }

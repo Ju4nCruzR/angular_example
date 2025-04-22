@@ -1,1 +1,10 @@
-<p>caravana-jugadores works!</p>
+<div>
+    <h2>Jugadores en la Caravana</h2>
+  
+    <ul>
+      <li *ngFor="let jugador of jugadores">
+        {{ jugador.nombre }} — Rol: {{ jugador.rol }}
+      </li>
+    </ul>
+  </div>
+  

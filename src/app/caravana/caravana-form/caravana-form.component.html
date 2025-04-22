@@ -1,1 +1,32 @@
-<p>caravana-form works!</p>
+<div>
+    <h2>Crear Caravana</h2>
+  
+    <form (ngSubmit)="crearCaravana()">
+      <label>Nombre:
+        <input type="text" [(ngModel)]="formulario.nombreCaravana" name="nombre" required />
+      </label>
+  
+      <label>Velocidad:
+        <input type="number" [(ngModel)]="formulario.velocidadCaravana" name="velocidad" />
+      </label>
+  
+      <label>Carga máxima:
+        <input type="number" [(ngModel)]="formulario.capacidadMaximaCargaCaravana" name="carga" />
+      </label>
+  
+      <label>Dinero disponible:
+        <input type="number" [(ngModel)]="formulario.dineroDisponibleCaravana" name="dinero" />
+      </label>
+  
+      <label>Vida:
+        <input type="number" [(ngModel)]="formulario.puntosDeVidaCaravana" name="vida" />
+      </label>
+  
+      <label>ID Ciudad:
+        <input type="number" [(ngModel)]="formulario.ciudadId" name="ciudad" />
+      </label>
+  
+      <button type="submit">Crear</button>
+    </form>
+  </div>
+  

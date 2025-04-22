@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-caravana-jugadores',
-  standalone: true,
-  imports: [],
-  templateUrl: './caravana-jugadores.component.html',
-  styleUrl: './caravana-jugadores.component.css'
+  templateUrl: './caravana-jugadores.component.html'
 })
 export class CaravanaJugadoresComponent {
-
+  @Input() jugadores: any[] = [];
 }

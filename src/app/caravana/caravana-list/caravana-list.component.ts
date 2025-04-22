@@ -1,33 +1,25 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { CaravanaService } from '../caravana.service';
+import { Component, OnInit } from '@angular/core';
 import { CaravanaDto } from '../dto/caravana-dto';
-import { CaravanaViewComponent } from '../caravana-view/caravana-view.component';
+import { CaravanaService } from '../caravana.service';
 
 @Component({
   selector: 'app-caravana-list',
-  standalone: true,
-  imports: [CommonModule, CaravanaViewComponent],
-  templateUrl: './caravana-list.component.html',
-  styleUrl: './caravana-list.component.css'
+  templateUrl: './caravana-list.component.html'
 })
-export class CaravanaListComponent {
+export class CaravanaListComponent implements OnInit {
   caravanas: CaravanaDto[] = [];
-
-  selectedCaravana: CaravanaDto | undefined;
+  selectedCaravana?: CaravanaDto;
 
   constructor(private caravanaService: CaravanaService) {}
 
   ngOnInit(): void {
-    this.caravanaService.listarCaravanas()
-      .subscribe(listaCaravanas => {
-        this.caravanas = listaCaravanas;
-      });
+    this.caravanaService.listarCaravanas().subscribe(data => {
+      this.caravanas = data;
+    });
   }
 
   seleccionarCaravana(caravana: CaravanaDto): void {
     this.selectedCaravana = caravana;
   }
-  
-
 }
+
