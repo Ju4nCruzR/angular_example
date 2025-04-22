@@ -1,12 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CiudadService } from '../ciudad.service';
+import { CiudadRutaDto } from '../../dto/ciudad/ciudad-ruta-dto';
 
 @Component({
   selector: 'app-ciudad-rutas',
-  standalone: true,
-  imports: [],
   templateUrl: './ciudad-rutas.component.html',
-  styleUrl: './ciudad-rutas.component.css'
+  styleUrls: ['./ciudad-rutas.component.css']
 })
-export class CiudadRutasComponent {
+export class CiudadRutasComponent implements OnInit {
+  ciudadId!: number;
+  rutas: CiudadRutaDto[] = [];
 
+  constructor(
+    private route: ActivatedRoute,
+    private ciudadService: CiudadService
+  ) {}
+
+  ngOnInit(): void {
+    this.ciudadId = +this.route.snapshot.paramMap.get('id')!;
+    this.cargarRutas();
+  }
+
+  cargarRutas(): void {
+    this.ciudadService.listarRutasCiudad().subscribe(data => {
+      this.rutas = data.filter(r => r.ciudadNombre && r.ciudadNombre.toLowerCase().includes(this.ciudadId.toString()));
+    });
+  }
+
+  eliminarRuta(ruta: CiudadRutaDto): void {
+    if (confirm(`¿Eliminar ruta hacia ${ruta.destinoNombre}?`)) {
+      this.ciudadService.eliminarRutaCiudad(ruta.id).subscribe(() => {
+        this.rutas = this.rutas.filter(r => r.id !== ruta.id);
+      });
+    }
+  }
 }

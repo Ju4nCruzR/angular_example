@@ -1,1 +1,24 @@
-<p>ciudad-edit works!</p>
+<h2>Editar Ciudad</h2>
+
+<form (ngSubmit)="guardarCambios()">
+  <label for="nombre">Nombre:</label>
+  <input id="nombre" type="text" [(ngModel)]="formulario.nombreCiudad" name="nombreCiudad" required placeholder="Nombre de la ciudad" />
+
+  <label for="impuestos">Impuestos de entrada:</label>
+  <input id="impuestos" type="number" [(ngModel)]="formulario.impuestosDeEntradaCiudad" name="impuestos" required placeholder="0.0" />
+
+  <label for="productos">IDs de productos asociados:</label>
+  <input id="productos" type="text" [(ngModel)]="productoIdsTexto" name="productoIds" placeholder="Ej: 1,2,3" title="IDs separados por coma" />
+
+  <label for="servicios">IDs de servicios asociados:</label>
+  <input id="servicios" type="text" [(ngModel)]="servicioIdsTexto" name="servicioIds" placeholder="Ej: 4,5" title="IDs separados por coma" />
+
+  <label for="rutas">IDs de rutas asociadas:</label>
+  <input id="rutas" type="text" [(ngModel)]="rutaIdsTexto" name="rutaIds" placeholder="Ej: 6,7" title="IDs separados por coma" />
+
+  <button type="submit">Guardar cambios</button>
+</form>
+
+<p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+
+<a routerLink="/ciudades">🔙 Volver a la lista</a>

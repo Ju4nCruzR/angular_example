@@ -1,1 +1,35 @@
-<p>ciudad-list works!</p>
+<h2>Listado de Ciudades</h2>
+
+<a routerLink="/ciudad-form">
+  <button>➕ Crear Ciudad</button>
+</a>
+
+<table *ngIf="ciudades.length > 0; else sinCiudades">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Impuestos de Entrada</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ciudad of ciudades">
+      <td>{{ ciudad.id }}</td>
+      <td>{{ ciudad.nombreCiudad }}</td>
+      <td>{{ ciudad.impuestosDeEntradaCiudad }}</td>
+      <td>
+        <a [routerLink]="['/ciudad', ciudad.id]">Ver</a>
+        <a [routerLink]="['/ciudad', ciudad.id, 'editar']">Editar</a>
+        <button (click)="eliminarCiudad(ciudad.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #sinCiudades>
+  <p>No hay ciudades registradas.</p>
+</ng-template>
+
+<p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+

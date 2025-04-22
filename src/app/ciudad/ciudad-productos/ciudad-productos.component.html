@@ -1,1 +1,32 @@
-<p>ciudad-productos works!</p>
+<h2>Productos de la Ciudad</h2>
+
+<div *ngIf="productos.length > 0; else sinProductos">
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.nombreProducto }}</td>
+        <td>
+            <input type="number" [(ngModel)]="producto.stockProducto" placeholder="Stock" />
+        </td>
+        <td>
+          <button (click)="actualizarStock(producto)">Actualizar</button>
+          <button (click)="eliminarProducto(producto)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #sinProductos>
+  <p>No hay productos asociados a esta ciudad.</p>
+</ng-template>
+
+<a routerLink="/ciudades">🔙 Volver a la lista</a>
+
