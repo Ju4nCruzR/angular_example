@@ -19,7 +19,7 @@
   <h3>Jugadores</h3>
   <ul *ngIf="juego.jugadores.length > 0; else sinJugadores">
     <li *ngFor="let jugador of juego.jugadores">
-      {{ jugador.nombreJugador }} - Rol: {{ jugador.rol }}
+      {{ jugador.nombreJugador }} - Rol: {{ jugador.rolJugador }}
     </li>
   </ul>
   <ng-template #sinJugadores><p>No hay jugadores asociados.</p></ng-template>

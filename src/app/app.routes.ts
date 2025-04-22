@@ -53,7 +53,8 @@ export const routes: Routes = [
   { path: 'producto/:id', component: ProductoViewComponent },
   { path: 'producto-form', component: ProductoFormComponent },
   { path: 'producto/:id/editar', component: ProductoEditComponent },
-  { path: 'producto/:id/asociaciones', component: ProductoAsociacionesComponent }
+  { path: 'producto/:id/asociaciones', component: ProductoAsociacionesComponent },
 
-
+  // Redirección de errores o ruta no encontrada 
+  { path: '**', redirectTo: 'caravanas' }
 ];

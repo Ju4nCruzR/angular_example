@@ -2,11 +2,13 @@ import { CaravanaProductoDto } from './caravana-producto-dto';
 
 export class CaravanaDetalleDto {
   id: number = 0;
-  nombre: string = '';
-  velocidad: number = 0;
-  capacidadMaximaCarga: number = 0;
-  dineroDisponible: number = 0;
-  puntosDeVida: number = 0;
-  nombreCiudadActual: string = '';
-  productos: CaravanaProductoDto[] = [];
+  nombreCaravana: string = '';
+  velocidadCaravana: number = 0;
+  capacidadMaximaCargaCaravana: number = 0;
+  dineroDisponibleCaravana: number = 0;
+  puntosDeVidaCaravana: number = 0;
+  nombreCiudadActualCaravana: string = '';
+  productosCaravana: CaravanaProductoDto[] = [];
+  ciudadId: number = 0;
+  caravana: any;
 }

@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CaravanaDetalleDto } from './dto/caravana-detalle-dto';
-import { CaravanaDto } from './dto/caravana-dto';
+
+import { CaravanaDetalleDto } from '../dto/caravana/caravana-detalle-dto';
+import { CaravanaDto } from '../dto/caravana/caravana-dto';
+// Si necesitas estos otros DTOs, puedes descomentar:
+// import { CaravanaFormularioDto } from '../../dto/caravana/caravana-formulario-dto';
+// import { CaravanaResumenDto } from '../../dto/caravana/caravana-resumen-dto';
+// import { CaravanaCompraDto } from '../../dto/caravana/caravana-compra-dto';
+// import { CaravanaVentaDto } from '../../dto/caravana/caravana-venta-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CaravanaService {
+  private apiUrl = 'http://localhost:8080/caravana'; // antes: '/caravana'
 
-  private apiUrl = '/caravana';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listarCaravanas(): Observable<CaravanaDto[]> {
     return this.http.get<CaravanaDto[]>(`${this.apiUrl}/list`);
@@ -53,39 +58,31 @@ export class CaravanaService {
     return this.http.post<void>(`${this.apiUrl}/${caravanaId}/jugadores?nombre=${nombre}&rol=${rol}`, {});
   }
 
-  // 🔍 Obtener productos por caravana
-  listarProductosPorCaravana(caravanaId: number) {
+  listarProductosPorCaravana(caravanaId: number): Observable<any[]> {
     return this.http.get<any[]>(`/caravana-producto/caravana/${caravanaId}`);
   }
 
-  // 🔍 Detalle de producto por caravanaId y productoId
-  obtenerProductoEnCaravana(caravanaId: number, productoId: number) {
+  obtenerProductoEnCaravana(caravanaId: number, productoId: number): Observable<any> {
     return this.http.get<any>(`/caravana-producto/caravana/${caravanaId}/producto/${productoId}`);
   }
 
-  // 🔍 Buscar producto por ID interno
-  obtenerProductoPorId(id: number) {
+  obtenerProductoPorId(id: number): Observable<any> {
     return this.http.get<any>(`/caravana-producto/${id}`);
   }
 
-  // 📝 Crear nuevo producto en caravana
-  crearProductoEnCaravana(caravanaId: number, productoId: number, stock: number) {
-    return this.http.post(`/caravana-producto/crear?caravanaId=${caravanaId}&productoId=${productoId}&stock=${stock}`, {});
+  crearProductoEnCaravana(caravanaId: number, productoId: number, stock: number): Observable<void> {
+    return this.http.post<void>(`/caravana-producto/crear?caravanaId=${caravanaId}&productoId=${productoId}&stock=${stock}`, {});
   }
 
-  // 📝 Actualizar stock
-  actualizarStockProducto(id: number, nuevoStock: number) {
-    return this.http.put(`/caravana-producto/${id}/actualizar?nuevoStock=${nuevoStock}`, {});
+  actualizarStockProducto(id: number, nuevoStock: number): Observable<void> {
+    return this.http.put<void>(`/caravana-producto/${id}/actualizar?nuevoStock=${nuevoStock}`, {});
   }
 
-  // 🗑️ Eliminar producto
-  eliminarProductoDeCaravana(id: number) {
-    return this.http.delete(`/caravana-producto/${id}/eliminar`);
+  eliminarProductoDeCaravana(id: number): Observable<void> {
+    return this.http.delete<void>(`/caravana-producto/${id}/eliminar`);
   }
 
-  // 🔍 Listar todos los productos de todas las caravanas
-  listarTodosLosProductos() {
+  listarTodosLosProductos(): Observable<any[]> {
     return this.http.get<any[]>(`/caravana-producto/list`);
   }
-
 }

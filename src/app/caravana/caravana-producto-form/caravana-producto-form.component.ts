@@ -17,6 +17,8 @@ export class CaravanaProductoFormComponent {
   caravanaId: number = 0;
   productoId: number = 0;
   stock: number = 0;
+  mensaje: string = '';
+
 
   constructor(
     private caravanaService: CaravanaService,

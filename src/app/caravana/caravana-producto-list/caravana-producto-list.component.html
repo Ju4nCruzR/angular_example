@@ -1,11 +1,11 @@
 <h2>Listado de productos en caravanas</h2>
 
 <a routerLink="/caravana-producto-form">
-    <button>➕ Agregar producto a caravana</button>
-  </a>
-  
-  <p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
- 
+  <button>➕ Agregar producto a caravana</button>
+</a>
+
+<p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+
 <table *ngIf="productos.length > 0; else sinProductos">
   <thead>
     <tr>
@@ -28,11 +28,8 @@
       <td>{{ producto.precioBaseProducto }}</td>
       <td>
         <a [routerLink]="['/caravana-producto-detalle', producto.id]">Ver</a>
-      </td>
-      <td>
-        <a [routerLink]="['/caravana-producto-detalle', producto.id]">Ver</a>
         <button (click)="eliminarProducto(producto.id)">Eliminar</button>
-      </td>      
+      </td>
     </tr>
   </tbody>
 </table>
@@ -40,3 +37,4 @@
 <ng-template #sinProductos>
   <p>No hay productos registrados.</p>
 </ng-template>
+

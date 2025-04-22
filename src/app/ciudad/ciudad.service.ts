@@ -2,6 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export interface CiudadDto {
+  id: number;
+  nombreCiudad: string;
+  impuestosDeEntradaCiudad: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,8 +28,8 @@ export class CiudadService {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
 
-  listarCiudades(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/list`);
+  listarCiudades(): Observable<CiudadDto[]> {
+    return this.http.get<CiudadDto[]>(`${this.baseUrl}/list`);
   }
 
   actualizarCiudad(id: number, dto: any): Observable<void> {

@@ -2,11 +2,10 @@
 
 <ul *ngIf="jugadores.length > 0; else sinJugadores">
   <li *ngFor="let jugador of jugadores">
-    {{ jugador.nombre }} — Rol: {{ jugador.rol }}
+    {{ jugador.nombreJugador }} — Rol: {{ jugador.rolJugador }}
   </li>
 </ul>
 
 <ng-template #sinJugadores>
   <p>No hay jugadores asignados a esta caravana.</p>
 </ng-template>
-

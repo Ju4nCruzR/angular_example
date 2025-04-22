@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,8 +13,9 @@ import { Router } from '@angular/router';
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './caravana-view.component.html',
 })
-export class CaravanaViewComponent {
-  caravana!: CaravanaDetalleDto;
+export class CaravanaViewComponent implements OnInit {
+  
+  caravana?: CaravanaDetalleDto;
   caravanaId!: number;
 
   ciudadDestinoId!: number;
