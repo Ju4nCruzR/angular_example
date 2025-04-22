@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CaravanaService } from '../caravana.service';
 
 @Component({
-  selector: 'app-caravana-jugadores',
-  templateUrl: './caravana-jugadores.component.html'
+  selector: 'app-caravana-rutas',
+  templateUrl: './caravana-rutas.component.html'
 })
-export class CaravanaJugadoresComponent implements OnInit {
-  jugadores: any[] = [];
+export class CaravanaRutasComponent implements OnInit {
+  rutasRecorridas: string[] = [];
   caravanaId!: number;
 
   constructor(
@@ -19,7 +19,7 @@ export class CaravanaJugadoresComponent implements OnInit {
     this.caravanaId = Number(this.route.parent?.snapshot.paramMap.get('id'));
 
     this.caravanaService.obtenerCaravana(this.caravanaId).subscribe(data => {
-      this.jugadores = (data as any).jugadores || [];
+      this.rutasRecorridas = (data as any).rutasRecorridas || [];
     });
   }
 }

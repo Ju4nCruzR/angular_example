@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CaravanaFormularioDto } from '../dto/caravana-formulario-dto';
 import { CaravanaService } from '../caravana.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-caravana-form',
@@ -9,12 +10,15 @@ import { CaravanaService } from '../caravana.service';
 export class CaravanaFormComponent {
   formulario: CaravanaFormularioDto = new CaravanaFormularioDto();
 
-  constructor(private caravanaService: CaravanaService) {}
+  constructor(
+    private caravanaService: CaravanaService,
+    private router: Router
+  ) {}
 
   crearCaravana(): void {
     this.caravanaService.crearCaravana(this.formulario).subscribe(() => {
       alert('Caravana creada con éxito');
-      this.formulario = new CaravanaFormularioDto(); // Limpiar formulario
+      this.router.navigate(['/caravanas']); // Redirige a la lista
     });
   }
 }

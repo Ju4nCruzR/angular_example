@@ -1,16 +1,15 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CaravanaDto } from './dto/caravana-dto';
-import { CaravanaFormularioDto } from './dto/caravana-formulario-dto';
 import { CaravanaDetalleDto } from './dto/caravana-detalle-dto';
-import { CaravanaProductoDto } from './dto/caravana-producto-dto';
+import { CaravanaDto } from './dto/caravana-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CaravanaService {
-  private apiUrl = 'http://localhost:8080/caravana';
+
+  private apiUrl = '/caravana';
 
   constructor(private http: HttpClient) {}
 
@@ -22,11 +21,11 @@ export class CaravanaService {
     return this.http.get<CaravanaDetalleDto>(`${this.apiUrl}/${id}`);
   }
 
-  crearCaravana(dto: CaravanaFormularioDto): Observable<void> {
+  crearCaravana(dto: any): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}`, dto);
   }
 
-  actualizarCaravana(id: number, dto: CaravanaFormularioDto): Observable<void> {
+  actualizarCaravana(id: number, dto: any): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}/editar`, dto);
   }
 
@@ -34,43 +33,24 @@ export class CaravanaService {
     return this.http.delete<void>(`${this.apiUrl}/${id}/eliminar`);
   }
 
-  moverCaravana(id: number, ciudadId: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/mover`, null, {
-      params: new HttpParams().set('ciudadId', ciudadId.toString())
-    });
+  moverCaravana(caravanaId: number, ciudadId: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${caravanaId}/mover?ciudadId=${ciudadId}`, {});
   }
 
-  comprarProducto(id: number, productoId: number, cantidad: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/comprar`, null, {
-      params: new HttpParams()
-        .set('productoId', productoId.toString())
-        .set('cantidad', cantidad.toString())
-    });
+  comprarProducto(caravanaId: number, productoId: number, cantidad: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${caravanaId}/comprar?productoId=${productoId}&cantidad=${cantidad}`, {});
   }
 
-  venderProducto(id: number, productoId: number, cantidad: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/vender`, null, {
-      params: new HttpParams()
-        .set('productoId', productoId.toString())
-        .set('cantidad', cantidad.toString())
-    });
+  venderProducto(caravanaId: number, productoId: number, cantidad: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${caravanaId}/vender?productoId=${productoId}&cantidad=${cantidad}`, {});
   }
 
-  aplicarServicio(id: number, servicioId: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/servicio`, null, {
-      params: new HttpParams().set('servicioId', servicioId.toString())
-    });
+  aplicarServicio(caravanaId: number, servicioId: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${caravanaId}/servicio?servicioId=${servicioId}`, {});
   }
 
-  agregarJugador(id: number, nombre: string, rol: string): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/jugadores`, null, {
-      params: new HttpParams()
-        .set('nombre', nombre)
-        .set('rol', rol)
-    });
+  agregarJugador(caravanaId: number, nombre: string, rol: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${caravanaId}/jugadores?nombre=${nombre}&rol=${rol}`, {});
   }
 
-  verProductos(id: number): Observable<CaravanaProductoDto[]> {
-    return this.http.get<CaravanaProductoDto[]>(`${this.apiUrl}/${id}/productos`);
-  }
 }

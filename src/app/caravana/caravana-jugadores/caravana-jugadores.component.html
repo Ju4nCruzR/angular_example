@@ -1,10 +1,12 @@
-<div>
-    <h2>Jugadores en la Caravana</h2>
-  
-    <ul>
-      <li *ngFor="let jugador of jugadores">
-        {{ jugador.nombre }} — Rol: {{ jugador.rol }}
-      </li>
-    </ul>
-  </div>
-  
+<h3>🧍 Jugadores en la Caravana</h3>
+
+<ul *ngIf="jugadores.length > 0; else sinJugadores">
+  <li *ngFor="let jugador of jugadores">
+    {{ jugador.nombre }} — Rol: {{ jugador.rol }}
+  </li>
+</ul>
+
+<ng-template #sinJugadores>
+  <p>No hay jugadores asignados a esta caravana.</p>
+</ng-template>
+

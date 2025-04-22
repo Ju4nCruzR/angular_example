@@ -1,10 +1,16 @@
-<div>
-    <h2>Productos en la Caravana</h2>
-  
-    <ul>
-      <li *ngFor="let producto of productos">
-        {{ producto.nombreProducto }} — Stock: {{ producto.stockEnCaravana }} — Peso total: {{ producto.pesoTotal }}
-      </li>
-    </ul>
-  </div>
+<h3>🛒 Productos en esta Caravana</h3>
+
+<ul *ngIf="productos.length > 0; else sinProductos">
+  <li *ngFor="let producto of productos">
+    {{ producto.nombreProducto }} —
+    Stock: {{ producto.stockEnCaravana }},
+    Peso total: {{ producto.pesoTotal }} kg,
+    Precio base: {{ producto.precioBaseProducto }}
+  </li>
+</ul>
+
+<ng-template #sinProductos>
+  <p>No hay productos en esta caravana.</p>
+</ng-template>
+
   

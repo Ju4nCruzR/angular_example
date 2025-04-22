@@ -1,0 +1,12 @@
+<h3>🗺️ Rutas recorridas</h3>
+
+<ul *ngIf="rutasRecorridas.length > 0; else sinRutas">
+  <li *ngFor="let ruta of rutasRecorridas">
+    {{ ruta }}
+  </li>
+</ul>
+
+<ng-template #sinRutas>
+  <p>No hay rutas recorridas por esta caravana.</p>
+</ng-template>
+

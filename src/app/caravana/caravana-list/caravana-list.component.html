@@ -1,7 +1,9 @@
 <div>
   <h1>Lista de Caravanas</h1>
-
+  <h2>Caravanas disponibles</h2>
   <app-caravana-view [caravana]="selectedCaravana"></app-caravana-view>
+
+  <a routerLink="/caravanas/nueva">➕ Crear nueva caravana</a>
 
   <ul>
     <li *ngFor="let caravana of caravanas">
@@ -12,6 +14,8 @@
       Vida: {{ caravana.puntosDeVidaCaravana }} – 
       Ciudad actual: {{ caravana.nombreCiudadActual }}
 
+      <a [routerLink]="['/caravanas', caravana.id]">Ver</a>
+      <a [routerLink]="['/caravanas', caravana.id, 'editar']">Editar</a>
       <br />
       <button (click)="seleccionarCaravana(caravana)">Ver detalle</button>
     </li>

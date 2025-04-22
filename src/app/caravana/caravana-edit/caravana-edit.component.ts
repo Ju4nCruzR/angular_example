@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CaravanaService } from '../caravana.service';
 import { CaravanaFormularioDto } from '../dto/caravana-formulario-dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-caravana-edit',
@@ -13,8 +14,9 @@ export class CaravanaEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private caravanaService: CaravanaService
-  ) { }
+    private caravanaService: CaravanaService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -33,7 +35,10 @@ export class CaravanaEditComponent implements OnInit {
   }
 
   actualizarCaravana(): void {
-    this.caravanaService.actualizarCaravana(this.caravanaId, this.formulario)
-      .subscribe(() => alert('Caravana actualizada correctamente'));
-  }
+    this.caravanaService.actualizarCaravana(this.caravanaId, this.formulario).subscribe(() => {
+      alert('Caravana actualizada correctamente');
+      this.router.navigate(['/caravanas']); // Redirige a la lista
+    });
+  }  
+   
 }

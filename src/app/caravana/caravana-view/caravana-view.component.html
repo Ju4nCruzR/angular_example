@@ -50,6 +50,10 @@
     </select>    
     <button (click)="agregarJugador()">Agregar Jugador</button>
   </div>
+
+  <a [routerLink]="['/caravanas', caravana?.id, 'editar']">✏️ Editar Caravana</a>
+  <butt<button (click)="eliminarCaravana()" class="boton-eliminar">🗑️ Eliminar Caravana</button>
+  <a routerLink="/caravanas">🔙 Volver a la lista</a>
 </div>
 
   
