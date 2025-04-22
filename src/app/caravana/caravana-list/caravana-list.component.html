@@ -1,0 +1,19 @@
+<div>
+  <h1>Lista de Caravanas</h1>
+
+  <app-caravana-view [caravana]="selectedCaravana"></app-caravana-view>
+
+  <ul>
+    <li *ngFor="let caravana of caravanas">
+      <strong>{{ caravana.nombreCaravana }}</strong> – 
+      Velocidad: {{ caravana.velocidadCaravana }} – 
+      Carga máxima: {{ caravana.capacidadMaximaCargaCaravana }} – 
+      Dinero: {{ caravana.dineroDisponibleCaravana }} – 
+      Vida: {{ caravana.puntosDeVidaCaravana }} – 
+      Ciudad actual: {{ caravana.nombreCiudadActual }}
+
+      <br />
+      <button (click)="seleccionarCaravana(caravana)">Ver detalle</button>
+    </li>
+  </ul>
+</div>
