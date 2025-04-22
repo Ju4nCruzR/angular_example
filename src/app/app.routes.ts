@@ -20,6 +20,11 @@ import { JugadorListComponent } from './jugador/jugador-list/jugador-list.compon
 import { JugadorViewComponent } from './jugador/jugador-view/jugador-view.component';
 import { JugadorFormComponent } from './jugador/jugador-form/jugador-form.component';
 import { JugadorEditComponent } from './jugador/jugador-edit/jugador-edit.component';
+import { ProductoListComponent } from './producto/producto-list/producto-list.component';
+import { ProductoViewComponent } from './producto/producto-view/producto-view.component';
+import { ProductoFormComponent } from './producto/producto-form/producto-form.component';
+import { ProductoEditComponent } from './producto/producto-edit/producto-edit.component';
+import { ProductoAsociacionesComponent } from './producto/producto-asociaciones/producto-asociaciones.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'caravanas', pathMatch: 'full' },
@@ -42,7 +47,13 @@ export const routes: Routes = [
   { path: 'juego/:id/editar', component: JuegoEditComponent },
   { path: 'jugadores', component: JugadorListComponent },
   { path: 'jugador/:id', component: JugadorViewComponent },
-  { path: 'jugador-form', component: JugadorFormComponent }
-  { path: 'jugador/:id/editar', component: JugadorEditComponent }
+  { path: 'jugador-form', component: JugadorFormComponent },
+  { path: 'jugador/:id/editar', component: JugadorEditComponent },
+  { path: 'productos', component: ProductoListComponent },
+  { path: 'producto/:id', component: ProductoViewComponent },
+  { path: 'producto-form', component: ProductoFormComponent },
+  { path: 'producto/:id/editar', component: ProductoEditComponent },
+  { path: 'producto/:id/asociaciones', component: ProductoAsociacionesComponent }
+
 
 ];

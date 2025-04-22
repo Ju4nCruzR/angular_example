@@ -1,0 +1,38 @@
+<h2>Detalle del Producto</h2>
+
+<div *ngIf="producto">
+  <p><strong>Nombre:</strong> {{ producto.nombreProducto }}</p>
+  <p><strong>Precio base:</strong> {{ producto.precioBaseProducto }}</p>
+  <p><strong>Peso:</strong> {{ producto.pesoProducto }}</p>
+  <p><strong>Factor oferta:</strong> {{ producto.factorOfertaProducto }}</p>
+  <p><strong>Factor demanda:</strong> {{ producto.factorDemandaProducto }}</p>
+
+  <hr />
+
+  <h3>Asociaciones</h3>
+  <div *ngIf="asociaciones">
+    <h4>Ciudades</h4>
+    <ul *ngIf="asociaciones.enCiudades.length > 0; else sinCiudades">
+      <li *ngFor="let ciudad of asociaciones.enCiudades">
+        {{ ciudad.nombreCiudad }} - Stock: {{ ciudad.stockProducto }}
+      </li>
+    </ul>
+    <ng-template #sinCiudades><p>No está disponible en ninguna ciudad.</p></ng-template>
+
+    <h4>Caravanas</h4>
+    <ul *ngIf="asociaciones.enCaravanas.length > 0; else sinCaravanas">
+      <li *ngFor="let caravana of asociaciones.enCaravanas">
+        {{ caravana.nombreCaravana }} - Stock: {{ caravana.stockEnCaravana }}
+      </li>
+    </ul>
+    <ng-template #sinCaravanas><p>No está disponible en ninguna caravana.</p></ng-template>
+  </div>
+
+  <hr />
+
+  <a [routerLink]="['/producto', producto.id, 'editar']">✏️ Editar Producto</a>
+  <a routerLink="/productos">
+    <button type="button" class="boton-volver">🔙 Volver a la lista</button>
+  </a>
+</div>
+
