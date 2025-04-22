@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ProductoService } from '../producto.service';
 import { ProductoDto } from '../../dto/producto/producto-dto';
 
 @Component({
   selector: 'app-producto-edit',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './producto-edit.component.html',
   styleUrls: ['./producto-edit.component.css']
 })

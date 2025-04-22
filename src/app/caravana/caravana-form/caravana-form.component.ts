@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { CaravanaFormularioDto } from '../../dto/caravana/caravana-formulario-dto';
 import { CaravanaService } from '../caravana.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-caravana-form',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './caravana-form.component.html'
 })
 export class CaravanaFormComponent {

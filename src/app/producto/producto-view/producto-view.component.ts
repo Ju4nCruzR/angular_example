@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ProductoDto } from '../../dto/producto/producto-dto';
 import { ProductoAsociacionesDto } from '../../dto/producto/producto-asociaciones-dto';
 import { ProductoService } from '../producto.service';
 
 @Component({
   selector: 'app-producto-view',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './producto-view.component.html',
   styleUrls: ['./producto-view.component.css']
 })

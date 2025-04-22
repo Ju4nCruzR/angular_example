@@ -1,13 +1,19 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { FormsModule } from '@angular/forms'; 
+import { RouterModule } from '@angular/router'; 
+import { HttpClientModule } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { HttpClientModule } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({eventCoalescing: true}),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
-    importProvidersFrom(HttpClientModule) 
-    ] 
+    importProvidersFrom(
+      FormsModule, 
+      RouterModule,    
+      HttpClientModule 
+    )
+  ]
 };

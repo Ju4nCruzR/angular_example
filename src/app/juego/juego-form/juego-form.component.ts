@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { JuegoFormularioDto } from '../../dto/juego/juego-formulario-dto';
 import { JuegoService } from '../juego.service';
 
 @Component({
   selector: 'app-juego-form',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './juego-form.component.html',
   styleUrls: ['./juego-form.component.css']
 })

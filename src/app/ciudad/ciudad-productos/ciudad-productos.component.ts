@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { CiudadService } from '../ciudad.service';
 import { CiudadProductoDto } from '../../dto/ciudad/ciudad-producto-dto';
 
 @Component({
   selector: 'app-ciudad-productos',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './ciudad-productos.component.html',
   styleUrls: ['./ciudad-productos.component.css']
 })

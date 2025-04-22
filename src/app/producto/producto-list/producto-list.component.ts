@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ProductoDto } from '../../dto/producto/producto-dto';
 import { ProductoService } from '../producto.service';
 
 @Component({
   selector: 'app-producto-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './producto-list.component.html',
   styleUrls: ['./producto-list.component.css']
 })

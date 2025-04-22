@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ProductoAsociacionesDto } from '../../dto/producto/producto-asociaciones-dto';
 import { ProductoService } from '../producto.service';
 
 @Component({
   selector: 'app-producto-asociaciones',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './producto-asociaciones.component.html',
   styleUrls: ['./producto-asociaciones.component.css']
 })

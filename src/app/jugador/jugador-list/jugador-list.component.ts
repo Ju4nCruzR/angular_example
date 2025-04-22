@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { JugadorService } from '../jugador.service';
 import { JugadorDto } from '../../dto/jugador/jugador-dto';
 
 @Component({
   selector: 'app-jugador-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './jugador-list.component.html',
   styleUrls: ['./jugador-list.component.css']
 })

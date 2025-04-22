@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 import { CaravanaService } from '../caravana.service';
 
 @Component({
   selector: 'app-caravana-producto-form',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './caravana-producto-form.component.html',
   styleUrls: ['./caravana-producto-form.component.css']
 })

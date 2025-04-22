@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { CiudadService } from '../ciudad.service';
 import { CiudadFormularioDto } from '../../dto/ciudad/ciudad-formulario-dto';
 import { CiudadDetalleDto } from '../../dto/ciudad/ciudad-detalle-dto';
 
 @Component({
   selector: 'app-ciudad-edit',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './ciudad-edit.component.html',
   styleUrls: ['./ciudad-edit.component.css']
 })

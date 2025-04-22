@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 import { CaravanaService } from '../caravana.service';
 import { CaravanaFormularioDto } from '../../dto/caravana/caravana-formulario-dto';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-caravana-edit',
-  templateUrl: './caravana-edit.component.html'
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './caravana-edit.component.html',
+  styleUrls: ['./caravana-edit.component.css'] // opcional si lo tienes
 })
 export class CaravanaEditComponent implements OnInit {
   caravanaId!: number;
@@ -28,8 +34,7 @@ export class CaravanaEditComponent implements OnInit {
         this.formulario.capacidadMaximaCargaCaravana = data.capacidadMaximaCarga;
         this.formulario.dineroDisponibleCaravana = data.dineroDisponible;
         this.formulario.puntosDeVidaCaravana = data.puntosDeVida;
-
-        this.formulario.ciudadId = 1; // ⚠️ Ajusta esto si tienes el ID de la ciudad actual
+        this.formulario.ciudadId = data.ciudadId ?? data.ciudad?.id ?? 0;
       });
     }
   }
@@ -37,8 +42,8 @@ export class CaravanaEditComponent implements OnInit {
   actualizarCaravana(): void {
     this.caravanaService.actualizarCaravana(this.caravanaId, this.formulario).subscribe(() => {
       alert('Caravana actualizada correctamente');
-      this.router.navigate(['/caravanas']); // Redirige a la lista
+      this.router.navigate(['/caravanas']);
     });
-  }  
-   
+  }
 }
+

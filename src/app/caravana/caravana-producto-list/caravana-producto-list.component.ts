@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { CaravanaService } from '../caravana.service';
 import { CaravanaProductoDto } from '../../dto/caravana/caravana-producto-dto';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-caravana-producto-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './caravana-producto-list.component.html',
   styleUrls: ['./caravana-producto-list.component.css']
 })

@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CaravanaService } from '../caravana.service';
 
 @Component({
   selector: 'app-caravana-jugadores',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './caravana-jugadores.component.html'
 })
 export class CaravanaJugadoresComponent implements OnInit {

@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CaravanaService } from '../caravana.service';
 import { CaravanaDetalleDto } from '../../dto/caravana/caravana-detalle-dto';
@@ -6,6 +9,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-caravana-view',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './caravana-view.component.html',
 })
 export class CaravanaViewComponent {
@@ -68,13 +73,13 @@ export class CaravanaViewComponent {
   }
 
   eliminarCaravana(): void {
-    if (confirm('¿Estás seguro de que deseas eliminar esta caravana?')) {
-      this.caravanaService.eliminarCaravana(this.caravanaId).subscribe(() => {
-        alert('Caravana eliminada');
-        this.router.navigate(['/caravanas']); // redirige a la lista
-      });
-    }
+  if (confirm('¿Estás seguro de que deseas eliminar esta caravana?')) {
+    this.caravanaService.eliminarCaravana(this.caravanaId).subscribe(() => {
+      alert('Caravana eliminada');
+      this.router.navigate(['/caravanas']); // redirige a la lista
+    });
   }
+}
 }
 
 

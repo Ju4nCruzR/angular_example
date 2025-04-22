@@ -2,9 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CiudadService } from '../ciudad.service';
 import { CiudadDto } from '../../dto/ciudad/ciudad-dto';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-ciudad-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './ciudad-list.component.html',
   styleUrls: ['./ciudad-list.component.css']
 })
