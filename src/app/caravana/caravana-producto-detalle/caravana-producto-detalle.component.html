@@ -1,1 +1,21 @@
-<p>caravana-producto-detalle works!</p>
+<div *ngIf="producto">
+    <h2>Producto en Caravana</h2>
+  
+    <p><strong>Caravana:</strong> {{ producto.nombreCaravana }}</p>
+    <p><strong>Producto:</strong> {{ producto.nombreProducto }}</p>
+    <p><strong>Stock actual:</strong> {{ producto.stockEnCaravana }}</p>
+    <p><strong>Peso por unidad:</strong> {{ producto.pesoProducto }}</p>
+    <p><strong>Peso total:</strong> {{ producto.pesoTotal }}</p>
+    <p><strong>Precio base:</strong> {{ producto.precioBaseProducto }}</p>
+  
+    <hr />
+  
+    <h3>Actualizar Stock</h3>
+    <input type="number" [(ngModel)]="nuevoStock" placeholder="Nuevo stock" />
+    <button (click)="actualizarStock()">Actualizar</button>
+  
+    <p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+  
+    <a routerLink="/caravanas">🔙 Volver a la lista</a>
+  </div>
+  

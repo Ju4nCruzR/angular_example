@@ -1,1 +1,42 @@
-<p>caravana-producto-list works!</p>
+<h2>Listado de productos en caravanas</h2>
+
+<a routerLink="/caravana-producto-form">
+    <button>➕ Agregar producto a caravana</button>
+  </a>
+  
+  <p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+ 
+<table *ngIf="productos.length > 0; else sinProductos">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Caravana</th>
+      <th>Producto</th>
+      <th>Stock</th>
+      <th>Peso total</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productos">
+      <td>{{ producto.id }}</td>
+      <td>{{ producto.nombreCaravana }}</td>
+      <td>{{ producto.nombreProducto }}</td>
+      <td>{{ producto.stockEnCaravana }}</td>
+      <td>{{ producto.pesoTotal }}</td>
+      <td>{{ producto.precioBaseProducto }}</td>
+      <td>
+        <a [routerLink]="['/caravana-producto-detalle', producto.id]">Ver</a>
+      </td>
+      <td>
+        <a [routerLink]="['/caravana-producto-detalle', producto.id]">Ver</a>
+        <button (click)="eliminarProducto(producto.id)">Eliminar</button>
+      </td>      
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #sinProductos>
+  <p>No hay productos registrados.</p>
+</ng-template>

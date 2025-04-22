@@ -1,1 +1,39 @@
-<p>caravana-producto-form works!</p>
+<h2>Crear producto en caravana</h2>
+
+<form (ngSubmit)="crearProducto()">
+  <label for="caravanaId">ID de Caravana:</label>
+  <input
+    type="number"
+    id="caravanaId"
+    [(ngModel)]="caravanaId"
+    name="caravanaId"
+    placeholder="Ej: 1"
+    required
+  />
+
+  <label for="productoId">ID de Producto:</label>
+  <input
+    type="number"
+    id="productoId"
+    [(ngModel)]="productoId"
+    name="productoId"
+    placeholder="Ej: 2"
+    required
+  />
+
+  <label for="stock">Stock inicial:</label>
+  <input
+    type="number"
+    id="stock"
+    [(ngModel)]="stock"
+    name="stock"
+    placeholder="Ej: 50"
+    required
+  />
+
+  <button type="submit">Crear</button>
+</form>
+
+<p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+
+
