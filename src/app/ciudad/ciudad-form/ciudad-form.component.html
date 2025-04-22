@@ -1,0 +1,65 @@
+<h2>{{ editar ? 'Editar Ciudad' : 'Nueva Ciudad' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+  <!-- Nombre de la ciudad -->
+  <div>
+    <label for="nombreCiudad">Nombre:</label>
+    <input
+      id="nombreCiudad"
+      type="text"
+      formControlName="nombreCiudad"
+      placeholder="Nombre de la ciudad"
+    />
+  </div>
+
+  <!-- Impuestos -->
+  <div>
+    <label for="impuestos">Impuestos de entrada:</label>
+    <input
+      id="impuestos"
+      type="number"
+      formControlName="impuestosDeEntradaCiudad"
+      placeholder="Ej: 150.0"
+    />
+  </div>
+
+  <!-- Asociación con productos -->
+  <div>
+    <label for="productoIds">IDs de productos (separados por coma):</label>
+    <input
+      id="productoIds"
+      type="text"
+      [value]="form.get('productoIds')?.value?.join(',')"
+      (input)="form.get('productoIds')?.setValue(toNumberArray($any($event.target).value))"
+      placeholder="Ej: 1, 2, 3"
+    />
+  </div>
+
+  <!-- Asociación con servicios -->
+  <div>
+    <label for="servicioIds">IDs de servicios (separados por coma):</label>
+    <input
+      id="servicioIds"
+      type="text"
+      [value]="form.get('servicioIds')?.value?.join(',')"
+      (input)="form.get('servicioIds')?.setValue(toNumberArray($any($event.target).value))"
+      placeholder="Ej: 4, 5"
+    />
+  </div>
+
+  <!-- Asociación con rutas -->
+  <div>
+    <label for="rutaIds">IDs de rutas (separados por coma):</label>
+    <input
+      id="rutaIds"
+      type="text"
+      [value]="form.get('rutaIds')?.value?.join(',')"
+      (input)="form.get('rutaIds')?.setValue(toNumberArray($any($event.target).value))"
+      placeholder="Ej: 6, 7"
+    />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">
+    {{ editar ? 'Actualizar' : 'Crear' }}
+  </button>
+</form>
