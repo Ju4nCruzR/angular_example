@@ -1,0 +1,20 @@
+<h2>{{ editar ? 'Editar Ruta' : 'Nueva Ruta' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <label for="origen">ID Ciudad Origen:</label>
+  <input id="origen" type="number" formControlName="ciudadOrigenId" placeholder="Ej: 1" />
+
+  <label for="destino">ID Ciudad Destino:</label>
+  <input id="destino" type="number" formControlName="ciudadDestinoId" placeholder="Ej: 2" />
+
+  <label for="distancia">Distancia (km):</label>
+  <input id="distancia" type="number" formControlName="distanciaRuta" placeholder="Ej: 20" />
+
+  <label for="segura">¿Es segura?</label>
+  <select id="segura" formControlName="segura">
+    <option [value]="true">Sí</option>
+    <option [value]="false">No</option>
+  </select>
+
+  <button type="submit" [disabled]="form.invalid">Guardar</button>
+</form>

@@ -1,0 +1,14 @@
+<h2>Lista de Rutas</h2>
+<button (click)="nueva()">+ Nueva Ruta</button>
+
+<ul>
+  <li *ngFor="let r of rutas">
+    Origen: {{ r.nombreCiudadOrigen }} → Destino: {{ r.nombreCiudadDestino }} 
+    (Distancia: {{ r.distanciaRuta }} km, {{ r.segura ? 'Segura' : 'Peligrosa' }})
+
+    <button (click)="ver(r.id)">Ver</button>
+    <button (click)="editar(r.id)">Editar</button>
+    <button (click)="eliminar(r.id)">Eliminar</button>
+  </li>
+</ul>
+

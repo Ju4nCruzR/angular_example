@@ -1,1 +1,24 @@
-<p>producto-detail works!</p>
+<div *ngIf="productoAsociado">
+    <h2>Detalle de {{ productoAsociado.producto.nombreProducto }}</h2>
+    <p>Precio base: {{ productoAsociado.producto.precioBaseProducto }}</p>
+    <p>Peso: {{ productoAsociado.producto.pesoProducto }}</p>
+    <p>Demanda: {{ productoAsociado.producto.factorDemandaProducto }}</p>
+    <p>Oferta: {{ productoAsociado.producto.factorOfertaProducto }}</p>
+  
+    <hr />
+  
+    <h3>Asociado a ciudades:</h3>
+    <ul>
+      <li *ngFor="let c of productoAsociado.enCiudades">
+        Ciudad: {{ c.nombreCiudad }} - Stock: {{ c.stockProducto }}
+      </li>
+    </ul>
+  
+    <h3>Asociado a caravanas:</h3>
+    <ul>
+      <li *ngFor="let car of productoAsociado.enCaravanas">
+        Caravana: {{ car.nombreCaravana }} - Stock: {{ car.stockEnCaravana }}
+      </li>
+    </ul>
+  </div>
+  

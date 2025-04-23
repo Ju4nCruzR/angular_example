@@ -35,6 +35,80 @@ export const routes: Routes = [
     loadComponent: () => import('./ciudad/ciudad-form/ciudad-form.component').then(m => m.CiudadFormComponent)
   },
 
+   // 🔷 Producto
+   {
+    path: 'productos',
+    loadComponent: () => import('./producto/producto-list/producto-list.component').then(m => m.ProductoListComponent)
+  },
+  {
+    path: 'producto/nueva',
+    loadComponent: () => import('./producto/producto-form/producto-form.component').then(m => m.ProductoFormComponent)
+  },
+  {
+    path: 'producto/:id',
+    loadComponent: () => import('./producto/producto-detail/producto-detail.component').then(m => m.ProductoDetailComponent)
+  },
+  {
+    path: 'producto/:id/editar',
+    loadComponent: () => import('./producto/producto-form/producto-form.component').then(m => m.ProductoFormComponent)
+  },
+
+  // 🔶 Servicio
+  {
+    path: 'servicios',
+    loadComponent: () => import('./servicio/servicio-list/servicio-list.component').then(m => m.ServicioListComponent)
+  },
+  {
+    path: 'servicio/nueva',
+    loadComponent: () => import('./servicio/servicio-form/servicio-form.component').then(m => m.ServicioFormComponent)
+  },
+  {
+    path: 'servicio/:id',
+    loadComponent: () => import('./servicio/servicio-detail/servicio-detail.component').then(m => m.ServicioDetailComponent)
+  },
+  {
+    path: 'servicio/:id/editar',
+    loadComponent: () => import('./servicio/servicio-form/servicio-form.component').then(m => m.ServicioFormComponent)
+  },
+
+    // 🔷 Rutas
+    {
+      path: 'rutas',
+      loadComponent: () => import('./ruta/ruta-list/ruta-list.component').then(m => m.RutaListComponent)
+    },
+    {
+      path: 'ruta/nueva',
+      loadComponent: () => import('./ruta/ruta-form/ruta-form.component').then(m => m.RutaFormComponent)
+    },
+    {
+      path: 'ruta/:id',
+      loadComponent: () => import('./ruta/ruta-detail/ruta-detail.component').then(m => m.RutaDetailComponent)
+    },
+    {
+      path: 'ruta/:id/editar',
+      loadComponent: () => import('./ruta/ruta-form/ruta-form.component').then(m => m.RutaFormComponent)
+    },
+  
+    // 🔶 Jugadores
+    {
+      path: 'jugadores',
+      loadComponent: () => import('./jugador/jugar-list/jugar-list.component').then(m => m.JugarListComponent)
+    },
+    {
+      path: 'jugador/nueva',
+      loadComponent: () => import('./jugador/jugar-form/jugar-form.component').then(m => m.JugarFormComponent)
+    },
+    {
+      path: 'jugador/:id',
+      loadComponent: () => import('./jugador/jugar-detail/jugar-detail.component').then(m => m.JugarDetailComponent)
+    },
+    {
+      path: 'jugador/:id/editar',
+      loadComponent: () => import('./jugador/jugar-form/jugar-form.component').then(m => m.JugarFormComponent)
+    },
+    
+      
+
   { path: '**', redirectTo: 'caravanas' }
 ];
 

@@ -24,6 +24,8 @@ export class CaravanaDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private service: CaravanaService
   ) {}
+  
+  nuevoStock: { [productoId: number]: number } = {};
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -57,4 +59,15 @@ export class CaravanaDetailComponent implements OnInit {
     this.service.aplicarServicio(this.caravana.caravana.id, this.servicioId)
       .subscribe(() => alert('¡Servicio aplicado!'));
   }
+
+  actualizarStock(id: number): void {
+    const stock = this.nuevoStock[id];
+    if (stock != null) {
+      this.service.actualizarStockProducto(id, stock).subscribe(() => {
+        alert('Stock actualizado');
+        this.ngOnInit(); // recarga los datos
+      });
+    }
+  }
+  
 }

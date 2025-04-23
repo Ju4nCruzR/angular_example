@@ -1,0 +1,8 @@
+<div *ngIf="ruta">
+    <h2>Detalle de la Ruta</h2>
+    <p><strong>Origen:</strong> {{ ruta.nombreCiudadOrigen }} (ID: {{ ruta.ciudadOrigenId }})</p>
+    <p><strong>Destino:</strong> {{ ruta.nombreCiudadDestino }} (ID: {{ ruta.ciudadDestinoId }})</p>
+    <p><strong>Distancia:</strong> {{ ruta.distanciaRuta }} km</p>
+    <p><strong>Segura:</strong> {{ ruta.segura ? 'Sí' : 'No' }}</p>
+  </div>
+  

@@ -1,56 +1,49 @@
-<div *ngIf="ciudad">
-  <h2>Detalle de {{ ciudad.ciudad.nombreCiudad }}</h2>
-  <p>Impuestos de entrada: {{ ciudad.ciudad.impuestosDeEntradaCiudad }}</p>
+<h2>Detalle de {{ ciudad.ciudad.nombreCiudad }}</h2>
+<p>Impuestos de entrada: {{ ciudad.ciudad.impuestosDeEntradaCiudad }}</p>
 
-  <!-- Productos -->
-  <h3>Productos disponibles</h3>
-  <ul>
-    <li *ngFor="let p of ciudad.productos">
-      {{ p.nombreProducto }} (Stock: {{ p.stockProducto }})
+<h3>Productos disponibles</h3>
+<ul>
+  <li *ngFor="let p of ciudad.productos">
+    {{ p.nombreProducto }} (Stock: {{ p.stockProducto }})
+    <label [for]="'nuevoStock-' + p.id" class="visually-hidden">Nuevo stock para {{ p.nombreProducto }}</label>
+    <input
+      [id]="'nuevoStock-' + p.id"
+      type="number"
+      [(ngModel)]="nuevoStock[p.id]"
+      placeholder="Nuevo stock"
+      title="Nuevo stock para {{ p.nombreProducto }}"
+    />
+    <button (click)="actualizarStock(p.id)">Actualizar</button>
+    <button (click)="eliminarProducto(p.productoId)">Eliminar</button>
+  </li>
+</ul>
 
-      <label for="stock-{{p.id}}" class="visually-hidden">Nuevo stock</label>
-      <input id="stock-{{p.id}}" type="number" [(ngModel)]="nuevoStock[p.id]" placeholder="Nuevo stock" />
-      <button (click)="actualizarStock(p.id)">Actualizar stock</button>
-      <button (click)="eliminarProducto(p.productoId)">Eliminar producto</button>
-    </li>
-  </ul>
+<h3>Agregar producto</h3>
+<label for="nuevoProductoId" class="visually-hidden">ID del nuevo producto</label>
+<input id="nuevoProductoId" type="number" [(ngModel)]="nuevoProductoId" placeholder="ID producto" title="ID del nuevo producto a agregar" />
+<label for="stockNuevoProducto" class="visually-hidden">Stock del nuevo producto</label>
+<input id="stockNuevoProducto" type="number" [(ngModel)]="stockNuevoProducto" placeholder="Stock" title="Cantidad de stock para el producto" />
+<button (click)="agregarProducto()">Agregar producto</button>
 
-  <div>
-    <label for="nuevoProductoId">ID de producto:</label>
-    <input id="nuevoProductoId" type="number" [(ngModel)]="nuevoProductoId" placeholder="Ej: 1" />
+<h3>Servicios disponibles</h3>
+<ul>
+  <li *ngFor="let s of ciudad.servicios">
+    {{ s.nombreServicio }} - Precio: {{ s.precio }}
+    <button *ngIf="!s.adquirido" (click)="adquirirServicio(s.id)">Adquirir</button>
+    <button (click)="eliminarServicio(s.id)">Eliminar</button>
+  </li>
+</ul>
 
-    <label for="stockNuevoProducto">Stock inicial:</label>
-    <input id="stockNuevoProducto" type="number" [(ngModel)]="stockNuevoProducto" placeholder="Ej: 10" />
+<h3>Rutas</h3>
+<ul>
+  <li *ngFor="let r of ciudad.rutas">
+    A {{ r.destinoNombre }} - Distancia: {{ r.distancia }} km - {{ r.esSegura ? 'Segura' : 'Peligrosa' }}
+    <button (click)="eliminarRuta(r.id)">Eliminar</button>
+  </li>
+</ul>
 
-    <button (click)="agregarProducto()">Agregar producto</button>
-  </div>
+<h3>Agregar ruta</h3>
+<label for="nuevaRutaId" class="visually-hidden">ID de la ruta</label>
+<input id="nuevaRutaId" type="number" [(ngModel)]="nuevaRutaId" placeholder="ID ruta" title="ID de la ruta a agregar" />
+<button (click)="agregarRuta()">Agregar ruta</button>
 
-  <hr />
-
-  <!-- Servicios -->
-  <h3>Servicios disponibles</h3>
-  <ul>
-    <li *ngFor="let s of ciudad.servicios">
-      {{ s.nombreServicio }} - Precio: {{ s.precio }} {{ s.adquirido ? '(Adquirido)' : '' }}
-      <button *ngIf="!s.adquirido" (click)="adquirirServicio(s.id)">Marcar como adquirido</button>
-      <button (click)="eliminarServicio(s.id)">Eliminar</button>
-    </li>
-  </ul>
-
-  <hr />
-
-  <!-- Rutas -->
-  <h3>Rutas</h3>
-  <ul>
-    <li *ngFor="let r of ciudad.rutas">
-      A {{ r.destinoNombre }} - Distancia: {{ r.distancia }} km - {{ r.esSegura ? 'Segura' : 'Peligrosa' }}
-      <button (click)="eliminarRuta(r.id)">Eliminar</button>
-    </li>
-  </ul>
-
-  <div>
-    <label for="nuevaRutaId">ID de ruta:</label>
-    <input id="nuevaRutaId" type="number" [(ngModel)]="nuevaRutaId" placeholder="Ej: 2" />
-    <button (click)="agregarRuta()">Agregar ruta</button>
-  </div>
-</div>

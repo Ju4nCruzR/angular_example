@@ -1,25 +1,24 @@
 <h2>{{ editar ? 'Editar Caravana' : 'Nueva Caravana' }}</h2>
 
 <form [formGroup]="form" (ngSubmit)="guardar()">
-    <label for="nombre">Nombre de la caravana</label>
-    <input id="nombre" type="text" formControlName="nombreCaravana" placeholder="Nombre" />
-  
-    <label for="velocidad">Velocidad</label>
-    <input id="velocidad" type="number" formControlName="velocidadCaravana" placeholder="Velocidad" />
-  
-    <label for="capacidad">Capacidad</label>
-    <input id="capacidad" type="number" formControlName="capacidadMaximaCargaCaravana" placeholder="Capacidad" />
-  
-    <label for="dinero">Dinero</label>
-    <input id="dinero" type="number" formControlName="dineroDisponibleCaravana" placeholder="Dinero" />
-  
-    <label for="vida">Puntos de vida</label>
-    <input id="vida" type="number" formControlName="puntosDeVidaCaravana" placeholder="Vida" />
-  
-    <label for="ciudad">ID de ciudad</label>
-    <input id="ciudad" type="number" formControlName="ciudadId" placeholder="ID Ciudad" />
-  
-    <button type="submit" [disabled]="form.invalid">Guardar</button>
-  </form>
-  
+  <label for="nombreCaravana">Nombre:</label>
+  <input id="nombreCaravana" type="text" formControlName="nombreCaravana" placeholder="Nombre de la caravana" title="Ingresa el nombre de la caravana" />
+
+  <label for="velocidadCaravana">Velocidad:</label>
+  <input id="velocidadCaravana" type="number" formControlName="velocidadCaravana" placeholder="Ej: 10" title="Velocidad base de la caravana" />
+
+  <label for="capacidadMaximaCargaCaravana">Capacidad de carga:</label>
+  <input id="capacidadMaximaCargaCaravana" type="number" formControlName="capacidadMaximaCargaCaravana" placeholder="Ej: 100" title="Peso máximo que puede cargar la caravana" />
+
+  <label for="dineroDisponibleCaravana">Dinero:</label>
+  <input id="dineroDisponibleCaravana" type="number" formControlName="dineroDisponibleCaravana" placeholder="Ej: 500" title="Dinero disponible en la caravana" />
+
+  <label for="puntosDeVidaCaravana">Puntos de vida:</label>
+  <input id="puntosDeVidaCaravana" type="number" formControlName="puntosDeVidaCaravana" placeholder="Ej: 100" title="Puntos de vida de la caravana" />
+
+  <label for="ciudadId">Ciudad ID:</label>
+  <input id="ciudadId" type="number" formControlName="ciudadId" placeholder="Ej: 3" title="ID de la ciudad actual de la caravana" />
+
+  <button type="submit">Guardar</button>
+</form>
 

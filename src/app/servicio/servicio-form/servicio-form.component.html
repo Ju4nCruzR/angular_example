@@ -1,1 +1,12 @@
-<p>servicio-form works!</p>
+<h2>{{ editar ? 'Editar Servicio' : 'Nuevo Servicio' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <label for="tipoServicio">Tipo de servicio:</label>
+  <input id="tipoServicio" type="text" formControlName="tipoServicio" placeholder="Ej: Reparación" />
+
+  <label for="precioServicio">Precio:</label>
+  <input id="precioServicio" type="number" formControlName="precioServicio" placeholder="Ej: 100" />
+
+  <button type="submit" [disabled]="form.invalid">Guardar</button>
+</form>
+

@@ -1,1 +1,19 @@
-<p>servicio-detail works!</p>
+<div *ngIf="servicio">
+    <h2>Detalle del Servicio</h2>
+    <p><strong>Tipo:</strong> {{ servicio.tipoServicio }}</p>
+    <p><strong>Precio:</strong> {{ servicio.precioServicio }}</p>
+  
+    <hr />
+  
+    <h3>Asociaciones</h3>
+    <ul *ngIf="asociaciones.length > 0; else sinAsociaciones">
+      <li *ngFor="let a of asociaciones">
+        Aplicado a Caravana #{{ a.caravanaId }} → {{ a.efectoAplicado }}
+      </li>
+    </ul>
+  
+    <ng-template #sinAsociaciones>
+      <p>No hay caravanas asociadas a este servicio.</p>
+    </ng-template>
+  </div>
+  

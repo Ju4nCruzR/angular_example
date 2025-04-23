@@ -1,65 +1,36 @@
 <h2>{{ editar ? 'Editar Ciudad' : 'Nueva Ciudad' }}</h2>
 
-<form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
-  <!-- Nombre de la ciudad -->
-  <div>
-    <label for="nombreCiudad">Nombre:</label>
-    <input
-      id="nombreCiudad"
-      type="text"
-      formControlName="nombreCiudad"
-      placeholder="Nombre de la ciudad"
-    />
-  </div>
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <label for="nombreCiudad">Nombre:</label>
+  <input id="nombreCiudad" type="text" formControlName="nombreCiudad" placeholder="Nombre de la ciudad" title="Ingresa el nombre de la ciudad" />
 
-  <!-- Impuestos -->
-  <div>
-    <label for="impuestos">Impuestos de entrada:</label>
-    <input
-      id="impuestos"
-      type="number"
-      formControlName="impuestosDeEntradaCiudad"
-      placeholder="Ej: 150.0"
-    />
-  </div>
+  <label for="impuestosDeEntradaCiudad">Impuestos de entrada:</label>
+  <input id="impuestosDeEntradaCiudad" type="number" formControlName="impuestosDeEntradaCiudad" placeholder="Ej: 50" title="Impuestos que se deben pagar para entrar a la ciudad" />
 
-  <!-- Asociación con productos -->
-  <div>
-    <label for="productoIds">IDs de productos (separados por coma):</label>
-    <input
-      id="productoIds"
-      type="text"
-      [value]="form.get('productoIds')?.value?.join(',')"
-      (input)="form.get('productoIds')?.setValue(toNumberArray($any($event.target).value))"
-      placeholder="Ej: 1, 2, 3"
-    />
-  </div>
+  <label for="productoIds">Productos (IDs separados por coma):</label>
+  <input
+    id="productoIds"
+    placeholder="Ej: 1,2,3"
+    title="IDs de productos disponibles en la ciudad"
+    [value]="form.get('productoIds')?.value?.join(',')"
+    (input)="form.get('productoIds')?.setValue(toNumberArray($any($event.target).value))" />
 
-  <!-- Asociación con servicios -->
-  <div>
-    <label for="servicioIds">IDs de servicios (separados por coma):</label>
-    <input
-      id="servicioIds"
-      type="text"
-      [value]="form.get('servicioIds')?.value?.join(',')"
-      (input)="form.get('servicioIds')?.setValue(toNumberArray($any($event.target).value))"
-      placeholder="Ej: 4, 5"
-    />
-  </div>
+  <label for="servicioIds">Servicios (IDs separados por coma):</label>
+  <input
+    id="servicioIds"
+    placeholder="Ej: 4,5"
+    title="IDs de servicios asociados a la ciudad"
+    [value]="form.get('servicioIds')?.value?.join(',')"
+    (input)="form.get('servicioIds')?.setValue(toNumberArray($any($event.target).value))" />
 
-  <!-- Asociación con rutas -->
-  <div>
-    <label for="rutaIds">IDs de rutas (separados por coma):</label>
-    <input
-      id="rutaIds"
-      type="text"
-      [value]="form.get('rutaIds')?.value?.join(',')"
-      (input)="form.get('rutaIds')?.setValue(toNumberArray($any($event.target).value))"
-      placeholder="Ej: 6, 7"
-    />
-  </div>
+  <label for="rutaIds">Rutas (IDs separados por coma):</label>
+  <input
+    id="rutaIds"
+    placeholder="Ej: 10,11"
+    title="IDs de rutas que conectan esta ciudad"
+    [value]="form.get('rutaIds')?.value?.join(',')"
+    (input)="form.get('rutaIds')?.setValue(toNumberArray($any($event.target).value))" />
 
-  <button type="submit" [disabled]="form.invalid">
-    {{ editar ? 'Actualizar' : 'Crear' }}
-  </button>
+  <button type="submit">Guardar</button>
 </form>
+

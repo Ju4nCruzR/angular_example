@@ -1,5 +1,4 @@
 <h2>Detalle de {{ caravana.caravana.nombreCaravana }}</h2>
-
 <p>Ciudad actual: {{ caravana.caravana.nombreCiudadActual }}</p>
 <p>Dinero: {{ caravana.caravana.dineroDisponibleCaravana }}</p>
 <p>Velocidad: {{ caravana.caravana.velocidadCaravana }}</p>
@@ -8,54 +7,34 @@
 
 <h3>Productos</h3>
 <ul>
-    <li *ngFor="let p of caravana.productos">
-        {{ p.nombreProducto }} (Stock: {{ p.stockEnCaravana }})
-    </li>
+  <li *ngFor="let p of caravana.productos">
+    {{ p.nombreProducto }} - Stock: {{ p.stockEnCaravana }}
+    <label for="ciudadId">Ciudad destino ID:</label>
+<input id="ciudadId" type="number" [(ngModel)]="ciudadId" placeholder="Ej: 3" title="ID de la ciudad a la que se moverá la caravana" />
+
+    <button (click)="actualizarStock(p.id)">Actualizar</button>
+  </li>
 </ul>
 
 <h3>Jugadores</h3>
 <ul>
-    <li *ngFor="let j of caravana.jugadores">
-        {{ j.nombreJugador }} - {{ j.rolJugador }}
-    </li>
+  <li *ngFor="let j of caravana.jugadores">
+    {{ j.nombreJugador }}
+  </li>
 </ul>
 
-<h3>Acciones</h3>
+<h3>Mover caravana</h3>
+<label for="productoId">ID del producto</label>
+<input id="productoId" type="number" [(ngModel)]="productoId" placeholder="Ej: 1" title="ID del producto a comprar o vender" />
 
-<!-- Mover -->
-<div>
-    <label for="ciudadId">Ciudad destino (ID):</label>
-    <input id="ciudadId" type="number" [(ngModel)]="ciudadId" placeholder="Ej. 3" />
-    <button (click)="mover()">Mover Caravana</button>
-</div>
+<button (click)="mover()">Mover</button>
 
-<!-- Comprar -->
-<div>
-    <label for="productoCompraId">Producto a comprar (ID):</label>
-    <input id="productoCompraId" type="number" [(ngModel)]="productoId" placeholder="Ej. 5" />
+<h3>Comprar / Vender</h3>
+<input type="number" [(ngModel)]="productoId" placeholder="ID producto" />
+<input type="number" [(ngModel)]="cantidad" placeholder="Cantidad" />
+<button (click)="comprar()">Comprar</button>
+<button (click)="vender()">Vender</button>
 
-    <label for="cantidadCompra">Cantidad:</label>
-    <input id="cantidadCompra" type="number" [(ngModel)]="cantidad" placeholder="Ej. 2" />
-
-    <button (click)="comprar()">Comprar</button>
-</div>
-
-
-<!-- Vender -->
-<div>
-    <label for="productoVentaId">Producto a vender (ID):</label>
-    <input id="productoVentaId" type="number" [(ngModel)]="productoId" placeholder="Ej. 5" />
-
-    <label for="cantidadVenta">Cantidad:</label>
-    <input id="cantidadVenta" type="number" [(ngModel)]="cantidad" placeholder="Ej. 1" />
-
-    <button (click)="vender()">Vender</button>
-</div>
-
-
-<!-- Aplicar servicio -->
-<div>
-    <label for="servicioId">Servicio a aplicar (ID):</label>
-    <input id="servicioId" type="number" [(ngModel)]="servicioId" placeholder="Ej. 2" />
-    <button (click)="aplicarServicio()">Aplicar Servicio</button>
-</div>
+<h3>Aplicar servicio</h3>
+<input type="number" [(ngModel)]="servicioId" placeholder="ID servicio" />
+<button (click)="aplicarServicio()">Aplicar</button>
