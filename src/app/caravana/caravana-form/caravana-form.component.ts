@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common'
 import { CaravanaService } from '../../service/caravana.service';
+import { CaravanaFormularioDto } from '../../model/caravana-formulario-dto';
+
 
 @Component({
   selector: 'app-caravana-form',
@@ -12,15 +14,16 @@ import { CaravanaService } from '../../service/caravana.service';
   styleUrl: './caravana-form.component.css'
 })
 export class CaravanaFormComponent implements OnInit {
+
   form!: FormGroup;
-  editar = false;
-  idCaravana?: number;
+  editar: boolean = false;
+  caravanaId!: number;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private service: CaravanaService
+    private caravanaService: CaravanaService
   ) {}
 
   ngOnInit(): void {
@@ -29,34 +32,39 @@ export class CaravanaFormComponent implements OnInit {
       velocidadCaravana: [0, Validators.required],
       capacidadMaximaCargaCaravana: [0, Validators.required],
       dineroDisponibleCaravana: [0, Validators.required],
-      puntosDeVidaCaravana: [100, Validators.required],
-      ciudadId: [1, Validators.required]
+      puntosDeVidaCaravana: [0, Validators.required],
+      ciudadId: [0, Validators.required] // se deja como campo libre
     });
 
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
       this.editar = true;
-      this.idCaravana = Number(id);
-      this.service.obtener(this.idCaravana).subscribe(data => {
-        const c = data.caravana;
+      this.caravanaId = Number(idParam);
+
+      this.caravanaService.obtener(this.caravanaId).subscribe((data) => {
         this.form.patchValue({
-          nombreCaravana: c.nombreCaravana,
-          velocidadCaravana: c.velocidadCaravana,
-          capacidadMaximaCargaCaravana: c.capacidadMaximaCargaCaravana,
-          dineroDisponibleCaravana: c.dineroDisponibleCaravana,
-          puntosDeVidaCaravana: c.puntosDeVidaCaravana,
-          ciudadId: 1 // actualízalo con el ID real si tienes uno dinámico
+          nombreCaravana: data.caravana.nombreCaravana,
+          velocidadCaravana: data.caravana.velocidadCaravana,
+          capacidadMaximaCargaCaravana: data.caravana.capacidadMaximaCargaCaravana,
+          dineroDisponibleCaravana: data.caravana.dineroDisponibleCaravana,
+          puntosDeVidaCaravana: data.caravana.puntosDeVidaCaravana,
+          ciudadId: data.caravana.ciudadId
         });
       });
     }
   }
 
   guardar(): void {
-    if (this.editar && this.idCaravana) {
-      this.service.actualizar(this.idCaravana, this.form.value).subscribe(() => this.router.navigate(['/caravanas']));
+    const dto: CaravanaFormularioDto = this.form.value;
+
+    if (this.editar) {
+      this.caravanaService.actualizar(this.caravanaId, dto).subscribe(() => {
+        this.router.navigate(['/caravana']);
+      });
     } else {
-      this.service.crear(this.form.value).subscribe(() => this.router.navigate(['/caravanas']));
+      this.caravanaService.crear(dto).subscribe(() => {
+        this.router.navigate(['/caravana']);
+      });
     }
   }
 }
-

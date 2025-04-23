@@ -87,27 +87,7 @@ export const routes: Routes = [
     {
       path: 'ruta/:id/editar',
       loadComponent: () => import('./ruta/ruta-form/ruta-form.component').then(m => m.RutaFormComponent)
-    },
-  
-    // 🔶 Jugadores
-    {
-      path: 'jugadores',
-      loadComponent: () => import('./jugador/jugar-list/jugar-list.component').then(m => m.JugarListComponent)
-    },
-    {
-      path: 'jugador/nueva',
-      loadComponent: () => import('./jugador/jugar-form/jugar-form.component').then(m => m.JugarFormComponent)
-    },
-    {
-      path: 'jugador/:id',
-      loadComponent: () => import('./jugador/jugar-detail/jugar-detail.component').then(m => m.JugarDetailComponent)
-    },
-    {
-      path: 'jugador/:id/editar',
-      loadComponent: () => import('./jugador/jugar-form/jugar-form.component').then(m => m.JugarFormComponent)
-    },
-    
-      
+    },      
 
   { path: '**', redirectTo: 'caravanas' }
 ];

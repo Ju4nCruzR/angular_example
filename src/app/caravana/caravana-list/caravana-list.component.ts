@@ -14,32 +14,40 @@ import { RouterModule } from '@angular/router';
   styleUrl: './caravana-list.component.css'
 })
 export class CaravanaListComponent implements OnInit {
+
   caravanas: CaravanaDto[] = [];
 
   constructor(
-    private service: CaravanaService,
+    private caravanaService: CaravanaService,
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.service.listar().subscribe(data => this.caravanas = data);
+  ngOnInit(): void {
+    this.cargarCaravanas();
   }
 
-  nuevaCaravana() {
-    this.router.navigate(['/caravana/nueva']);
+  cargarCaravanas(): void {
+    this.caravanaService.listar().subscribe((data: CaravanaDto[]) => {
+      this.caravanas = data;
+    });
   }
-  
-  verDetalle(id: number) {
-    this.router.navigate(['/caravana', id]);
-  }
+
+  nuevaCaravana(): void {
+    this.router.navigate(['/caravana/nueva']); 
+  }  
 
   editar(id: number): void {
-    this.router.navigate(['/caravana', id, 'editar']);
+    this.router.navigate([`/caravana/${id}/editar`]);
   }
+  
+  verDetalle(id: number): void {
+    this.router.navigate([`/caravana/${id}`]); 
+  } 
+  
 
-  eliminar(id: number) {
-    this.service.eliminar(id).subscribe(() => {
-      this.caravanas = this.caravanas.filter(c => c.id !== id);
-    });
+  eliminar(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar esta caravana?')) {
+      this.caravanaService.eliminar(id).subscribe(() => this.cargarCaravanas());
+    }
   }
 }

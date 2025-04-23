@@ -6,5 +6,6 @@ export interface CaravanaDto {
     dineroDisponibleCaravana: number;
     puntosDeVidaCaravana: number;
     nombreCiudadActual: string;
+    ciudadId: number;
   }
   

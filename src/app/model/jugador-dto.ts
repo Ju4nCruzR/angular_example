@@ -1,7 +1,5 @@
 export interface JugadorDto {
-    id: number;
-    nombreJugador: string;
-    nivelJugador: number;
-    experienciaJugador: number;
-  }
-  
+  id: number;
+  nombreJugador: string;
+  rolJugador: string;
+}

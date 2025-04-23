@@ -1,40 +1,61 @@
-<h2>Detalle de {{ caravana.caravana.nombreCaravana }}</h2>
-<p>Ciudad actual: {{ caravana.caravana.nombreCiudadActual }}</p>
-<p>Dinero: {{ caravana.caravana.dineroDisponibleCaravana }}</p>
-<p>Velocidad: {{ caravana.caravana.velocidadCaravana }}</p>
-<p>Capacidad máxima: {{ caravana.caravana.capacidadMaximaCargaCaravana }}</p>
-<p>Vida actual: {{ caravana.caravana.puntosDeVidaCaravana }}</p>
+<div *ngIf="caravana">
+  <h2>Detalle de {{ caravana.caravana.nombreCaravana }}</h2>
 
-<h3>Productos</h3>
-<ul>
-  <li *ngFor="let p of caravana.productos">
-    {{ p.nombreProducto }} - Stock: {{ p.stockEnCaravana }}
-    <label for="ciudadId">Ciudad destino ID:</label>
-<input id="ciudadId" type="number" [(ngModel)]="ciudadId" placeholder="Ej: 3" title="ID de la ciudad a la que se moverá la caravana" />
+  <p>Ciudad actual: {{ caravana.caravana.nombreCiudadActual }}</p>
+  <p>Dinero: {{ caravana.caravana.dineroDisponibleCaravana }}</p>
+  <p>Velocidad: {{ caravana.caravana.velocidadCaravana }}</p>
+  <p>Capacidad máxima: {{ caravana.caravana.capacidadMaximaCargaCaravana }}</p>
+  <p>Vida actual: {{ caravana.caravana.puntosDeVidaCaravana }}</p>
 
-    <button (click)="actualizarStock(p.id)">Actualizar</button>
-  </li>
-</ul>
+  <h3>Productos en caravana</h3>
+  <ul>
+    <li *ngFor="let p of caravana.productos">
+      {{ p.nombreProducto }} - Stock:
+      <input type="number" [(ngModel)]="p.stockEnCaravana" placeholder="Ej: 10" title="Nuevo stock para el producto" />
+      <button (click)="actualizarStock(p.id)">Actualizar</button>
+      <button (click)="eliminarProducto(p.id)">Eliminar</button>
+    </li>
+  </ul>
 
-<h3>Jugadores</h3>
-<ul>
-  <li *ngFor="let j of caravana.jugadores">
-    {{ j.nombreJugador }}
-  </li>
-</ul>
+  <h3>Agregar producto a caravana</h3>
 
-<h3>Mover caravana</h3>
-<label for="productoId">ID del producto</label>
-<input id="productoId" type="number" [(ngModel)]="productoId" placeholder="Ej: 1" title="ID del producto a comprar o vender" />
+<label for="nuevoProductoId">Producto:</label>
+<select [(ngModel)]="nuevoProductoId" id="nuevoProductoId" title="Selecciona un producto">
+  <option [value]="0" disabled selected>-- Selecciona un producto --</option>
+  <option *ngFor="let p of productosDisponibles" [value]="p.productoId">
+    {{ p.nombreProducto }}
+  </option>
+</select>
 
-<button (click)="mover()">Mover</button>
+<label for="nuevoStock">Stock:</label>
+<input type="number" [(ngModel)]="nuevoStock" id="nuevoStock"
+       placeholder="Ej: 5" title="Stock inicial para el nuevo producto" />
 
-<h3>Comprar / Vender</h3>
-<input type="number" [(ngModel)]="productoId" placeholder="ID producto" />
-<input type="number" [(ngModel)]="cantidad" placeholder="Cantidad" />
-<button (click)="comprar()">Comprar</button>
-<button (click)="vender()">Vender</button>
+<button (click)="agregarProducto()">Agregar</button>
 
-<h3>Aplicar servicio</h3>
-<input type="number" [(ngModel)]="servicioId" placeholder="ID servicio" />
-<button (click)="aplicarServicio()">Aplicar</button>
+
+  <h3>Jugadores</h3>
+  <ul>
+    <li *ngFor="let j of caravana.jugadores">
+      {{ j.nombreJugador }}
+    </li>
+  </ul>
+
+  <h3>Mover caravana</h3>
+  <label for="ciudadIdMover">Ciudad destino ID:</label>
+  <input id="ciudadIdMover" type="number" [(ngModel)]="ciudadId" placeholder="Ej: 3" />
+  <button (click)="mover()">Mover</button>
+
+  <h3>Comprar / Vender</h3>
+  <label for="productoId">ID producto:</label>
+  <input id="productoId" type="number" [(ngModel)]="productoId" />
+  <label for="cantidad">Cantidad:</label>
+  <input id="cantidad" type="number" [(ngModel)]="cantidad" />
+  <button (click)="comprar()">Comprar</button>
+  <button (click)="vender()">Vender</button>
+
+  <h3>Aplicar servicio</h3>
+  <label for="servicioId">ID servicio:</label>
+  <input id="servicioId" type="number" [(ngModel)]="servicioId" />
+  <button (click)="aplicarServicio()">Aplicar</button>
+</div>

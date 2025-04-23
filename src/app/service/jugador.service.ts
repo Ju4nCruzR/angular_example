@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JugadorDto } from '../model/jugador-dto';
-import { JugadorResumenDto } from '../model/jugador-resumen-dto';
 
 @Injectable({ providedIn: 'root' })
 export class JugadorService {
@@ -10,8 +9,8 @@ export class JugadorService {
 
   constructor(private http: HttpClient) {}
 
-  listar(): Observable<JugadorResumenDto[]> {
-    return this.http.get<JugadorResumenDto[]>(`${this.apiUrl}/list`);
+  listar(): Observable<JugadorDto[]> {
+    return this.http.get<JugadorDto[]>(`${this.apiUrl}/list`);
   }
 
   obtener(id: number): Observable<JugadorDto> {
