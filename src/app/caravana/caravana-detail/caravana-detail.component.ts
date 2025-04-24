@@ -279,4 +279,15 @@ export class CaravanaDetailComponent implements OnInit {
     });
   }
 
+  servicioYaAplicado(servicio: ServicioDto): boolean {
+    return this.caravanaDetalle.serviciosAplicados?.some(
+      s => s.tipoServicio === servicio.tipoServicio
+    );
+  }
+
+  aplicarServicioDesdeLista(servicioId: number): void {
+    this.servicioId = servicioId;
+    this.aplicarServicio();
+  }
+  
 }

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CiudadDetalleDto } from '../../model/ciudad-detalle-dto';
 import { CiudadService } from '../../service/ciudad.service';
+import { ProductoService } from '../../service/producto.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ProductoDto } from '../../model/producto-dto';
 
 @Component({
   selector: 'app-ciudad-detail',
@@ -15,12 +17,22 @@ import { FormsModule } from '@angular/forms';
 })
 export class CiudadDetailComponent implements OnInit {
   ciudad!: CiudadDetalleDto;
+  productosTotales: ProductoDto[] = [];
 
-  constructor(private route: ActivatedRoute, private service: CiudadService) { }
+  constructor(private route: ActivatedRoute, private service: CiudadService, private productoService: ProductoService) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.service.obtener(id).subscribe(data => this.ciudad = data);
+  
+    this.service.obtener(id).subscribe(data => {
+      this.ciudad = data;
+      console.log('📦 Ciudad cargada:', data);
+    });
+  
+    this.productoService.listar().subscribe(productos => {
+      this.productosTotales = productos;
+      console.log('🛒 Productos totales:', productos);
+    });
   }
 
   nuevoStock: { [productoId: number]: number } = {};

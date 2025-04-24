@@ -84,22 +84,19 @@
   </tr>
 </table> 
 
-  <h3>Aplicar servicio a la Caravana</h3>
-  <table>
-    <tr>
-      <td><label for="servicioId">Servicio:</label></td>
-      <td>
-        <select [(ngModel)]="servicioId" name="servicioId" id="servicioId">
-          <option [ngValue]="0">-- Selecciona un servicio --</option>
-          <option *ngFor="let s of serviciosDisponibles" [ngValue]="s.id">
-            {{ s.tipoServicio }}
-          </option>
-        </select>
-      </td>
-      <td *ngIf="nombreServicioSeleccionado">
-        <small><strong>Servicio:</strong> {{ nombreServicioSeleccionado }}</small>
-      </td>
-      <td><button (click)="aplicarServicio()">Aplicar</button></td>
-    </tr>
-  </table>
+<h3>Servicios disponibles</h3>
+<ul>
+  <li *ngFor="let s of serviciosDisponibles">
+    {{ s.tipoServicio }} - Precio: {{ s.precioServicio }}
+    
+    <button
+      *ngIf="!servicioYaAplicado(s)"
+      (click)="aplicarServicioDesdeLista(s.id)">
+      Aplicar
+    </button>
+
+    <span *ngIf="servicioYaAplicado(s)">✔️ Aplicado</span>
+  </li>
+</ul>
+
 </div>
