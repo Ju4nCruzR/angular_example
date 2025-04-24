@@ -1,3 +1,5 @@
+import { ServicioDto } from "./servicio-dto";
+
 export interface CaravanaDto {
     id: number;
     nombreCaravana: string;
@@ -7,5 +9,6 @@ export interface CaravanaDto {
     puntosDeVidaCaravana: number;
     nombreCiudadActual: string;
     ciudadId: number;
+    servicios: ServicioDto[];
   }
   

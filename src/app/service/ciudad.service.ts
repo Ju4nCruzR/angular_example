@@ -36,6 +36,11 @@ export class CiudadService {
     return this.http.delete<void>(`${this.apiUrl}/${id}/eliminar`);
   }
   
+  obtenerStockDisponible(ciudadId: number, productoId: number): Observable<number> {
+    return this.http.get<number>(`http://localhost:8080/ciudad/${ciudadId}/producto/${productoId}/stock`);
+  }
+  
+
 actualizarStockProducto(id: number, nuevoStock: number) {
   return this.http.put<CiudadProductoDto>(`http://localhost:8080/ciudad-producto/${id}?nuevoStock=${nuevoStock}`, {});
 }

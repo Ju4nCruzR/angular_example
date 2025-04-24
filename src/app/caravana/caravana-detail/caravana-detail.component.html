@@ -1,61 +1,65 @@
-<div *ngIf="caravana">
-  <h2>Detalle de {{ caravana.caravana.nombreCaravana }}</h2>
+<div *ngIf="caravana && caravanaDetalle">
+  <h2>Detalle de {{ caravana.nombreCaravana }}</h2>
+  <p *ngIf="mensaje">{{ mensaje }}</p>
 
-  <p>Ciudad actual: {{ caravana.caravana.nombreCiudadActual }}</p>
-  <p>Dinero: {{ caravana.caravana.dineroDisponibleCaravana }}</p>
-  <p>Velocidad: {{ caravana.caravana.velocidadCaravana }}</p>
-  <p>Capacidad máxima: {{ caravana.caravana.capacidadMaximaCargaCaravana }}</p>
-  <p>Vida actual: {{ caravana.caravana.puntosDeVidaCaravana }}</p>
+  <p>Ciudad actual: {{ caravana.nombreCiudadActual }}</p>
+  <p>Dinero: {{ caravana.dineroDisponibleCaravana }}</p>
+  <p>Velocidad: {{ caravana.velocidadCaravana }}</p>
+  <p>Capacidad máxima: {{ caravana.capacidadMaximaCargaCaravana }}</p>
+  <p>Vida actual: {{ caravana.puntosDeVidaCaravana }}</p>
 
   <h3>Productos en caravana</h3>
   <ul>
-    <li *ngFor="let p of caravana.productos">
-      {{ p.nombreProducto }} - Stock:
-      <input type="number" [(ngModel)]="p.stockEnCaravana" placeholder="Ej: 10" title="Nuevo stock para el producto" />
-      <button (click)="actualizarStock(p.id)">Actualizar</button>
-      <button (click)="eliminarProducto(p.id)">Eliminar</button>
+    <li *ngFor="let p of caravanaDetalle.productos">
+      {{ p.nombreProducto }} - Stock: {{ p.stockEnCaravana }}
     </li>
   </ul>
 
-  <h3>Agregar producto a caravana</h3>
+<h3>Jugadores en la Caravana</h3>
+<ul>
+  <li *ngFor="let j of caravanaDetalle.jugadores">
+    {{ j.nombreJugador }}
+  </li>
+</ul>
 
-<label for="nuevoProductoId">Producto:</label>
-<select [(ngModel)]="nuevoProductoId" id="nuevoProductoId" title="Selecciona un producto">
-  <option [value]="0" disabled selected>-- Selecciona un producto --</option>
-  <option *ngFor="let p of productosDisponibles" [value]="p.productoId">
-    {{ p.nombreProducto }}
-  </option>
-</select>
-
-<label for="nuevoStock">Stock:</label>
-<input type="number" [(ngModel)]="nuevoStock" id="nuevoStock"
-       placeholder="Ej: 5" title="Stock inicial para el nuevo producto" />
-
-<button (click)="agregarProducto()">Agregar</button>
-
-
-  <h3>Jugadores</h3>
-  <ul>
-    <li *ngFor="let j of caravana.jugadores">
-      {{ j.nombreJugador }}
-    </li>
-  </ul>
-
-  <h3>Mover caravana</h3>
-  <label for="ciudadIdMover">Ciudad destino ID:</label>
-  <input id="ciudadIdMover" type="number" [(ngModel)]="ciudadId" placeholder="Ej: 3" />
-  <button (click)="mover()">Mover</button>
+<h3>Mover caravana</h3>
+<table>
+  <tr>
+    <td><label for="ciudadId">Ciudad destino ID:</label></td>
+    <td><input id="ciudadId" type="number" [(ngModel)]="ciudadId" min="1"  /></td>
+    <td><button (click)="mover()">Mover</button></td>
+  </tr>
+</table>
 
   <h3>Comprar / Vender</h3>
-  <label for="productoId">ID producto:</label>
-  <input id="productoId" type="number" [(ngModel)]="productoId" />
-  <label for="cantidad">Cantidad:</label>
-  <input id="cantidad" type="number" [(ngModel)]="cantidad" />
-  <button (click)="comprar()">Comprar</button>
-  <button (click)="vender()">Vender</button>
+  <table>
+    <tr>
+      <td><label for="productoId">ID producto:</label></td>
+      <td><input id="productoId" type="number" [(ngModel)]="productoId" min="1" /></td>
+      <td *ngIf="nombreProductoSeleccionado">
+        <small><strong>Producto:</strong> {{ nombreProductoSeleccionado }}</small>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="cantidad">Cantidad:</label></td>
+      <td><input id="cantidad" type="number" [(ngModel)]="cantidad" min="1"/></td>
+      <td>
+        <button (click)="comprar()">Comprar</button>
+        <button (click)="vender()">Vender</button>
+      </td>
+    </tr>
+  </table>  
 
-  <h3>Aplicar servicio</h3>
-  <label for="servicioId">ID servicio:</label>
-  <input id="servicioId" type="number" [(ngModel)]="servicioId" />
-  <button (click)="aplicarServicio()">Aplicar</button>
-</div>
+  <h3>Aplicar servicio a la Caravana</h3>
+  <table>
+    <tr>
+      <td><label for="servicioId">ID servicio:</label></td>
+      <td><input id="servicioId" type="number" [(ngModel)]="servicioId" min="1" /></td>
+      <div *ngIf="nombreServicioSeleccionado">
+        <small><strong>Servicio:</strong> {{ nombreServicioSeleccionado }}</small>
+      </div>      
+      <td><button (click)="aplicarServicio()">Aplicar</button></td>
+    </tr>
+  </table>
+  
+  
