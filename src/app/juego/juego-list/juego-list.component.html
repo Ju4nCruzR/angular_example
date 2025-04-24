@@ -1,1 +1,14 @@
-<p>juego-list works!</p>
+<h2>Lista de Juegos</h2>
+<button (click)="nuevo()">+ Nuevo Juego</button>
+
+<ul>
+  <li *ngFor="let j of juegos">
+    Juego #{{ j.id }} - {{ j.descripcion }}
+    (Tiempo: {{ j.tiempoTranscurridoDeJuego }}/{{ j.tiempoLimiteDeJuego }} min,
+    Nivel mínimo: {{ j.nivelMinimoGananciasJuego }})
+
+    <button (click)="ver(j.id)">Ver</button>
+    <button (click)="editar(j.id)">Editar</button>
+    <button (click)="eliminar(j.id)">Eliminar</button>
+  </li>
+</ul>

@@ -1,1 +1,30 @@
-<p>juego-form works!</p>
+<h2>{{ modoEdicion ? 'Editar' : 'Nuevo' }} Juego</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <label>Tiempo límite (min):
+    <input type="number" formControlName="tiempoLimiteDeJuego" />
+  </label><br />
+
+  <label>Tiempo transcurrido (min):
+    <input type="number" formControlName="tiempoTranscurridoDeJuego" />
+  </label><br />
+
+  <label>Nivel mínimo de ganancias:
+    <input type="number" formControlName="nivelMinimoGananciasJuego" />
+  </label><br />
+
+  <h3>Selecciona caravanas participantes:</h3>
+  <ul>
+    <li *ngFor="let c of caravanasDisponibles">
+      <label>
+        <input type="checkbox" [checked]="isSeleccionada(c.id)" (change)="toggleCaravana(c.id)" />
+        {{ c.nombreCaravana }} (Ciudad: {{ c.nombreCiudadActual }})
+      </label>
+    </li>
+  </ul>
+
+  <button type="submit" [disabled]="form.invalid">
+    {{ modoEdicion ? 'Actualizar' : 'Crear' }}
+  </button>
+</form>
+

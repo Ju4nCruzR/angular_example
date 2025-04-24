@@ -106,6 +106,22 @@ export const routes: Routes = [
     loadComponent: () => import('./jugador/jugador-form/jugador-form.component').then(m => m.JugadorFormComponent)
   },
   
+  {
+    path: 'juegos',
+    loadComponent: () => import('./juego/juego-list/juego-list.component').then(m => m.JuegoListComponent)
+  },
+  {
+    path: 'juego/nuevo',
+    loadComponent: () => import('./juego/juego-form/juego-form.component').then(m => m.JuegoFormComponent)
+  },
+  {
+    path: 'juego/:id',
+    loadComponent: () => import('./juego/juego-detail/juego-detail.component').then(m => m.JuegoDetailComponent)
+  },
+  {
+    path: 'juego/:id/editar',
+    loadComponent: () => import('./juego/juego-form/juego-form.component').then(m => m.JuegoFormComponent)
+  },
 
   { path: '**', redirectTo: 'caravanas' }
 ];

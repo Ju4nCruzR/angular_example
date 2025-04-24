@@ -1,1 +1,21 @@
-<p>juego-detail works!</p>
+<div *ngIf="juego">
+    <h2>Detalle del Juego #{{ juego.id }}</h2>
+
+    <p><strong>Tiempo transcurrido:</strong> {{ juego.tiempoTranscurridoDeJuego }} min</p>
+    <p><strong>Tiempo límite:</strong> {{ juego.tiempoLimiteDeJuego }} min</p>
+    <p><strong>Nivel mínimo de ganancias:</strong> {{ juego.nivelMinimoGananciasJuego }}</p>
+
+    <h3>Caravanas participantes</h3>
+    <ul>
+        <li *ngFor="let c of juego.caravanas">
+            {{ c.nombreCaravana }} (Ubicada en: {{ c.ciudadActual }})
+        </li>
+    </ul>
+
+    <h3>Jugadores participantes</h3>
+    <ul>
+        <li *ngFor="let j of juego.jugadores">
+            {{ j.nombreJugador }} (Rol: {{ j.rolJugador }})
+        </li>
+    </ul>
+</div>
