@@ -1,36 +1,77 @@
-<h2>{{ editar ? 'Editar Ciudad' : 'Nueva Ciudad' }}</h2>
+<div *ngIf="editar && ciudad">
+  <h2>{{ editar ? 'Editar Ciudad' : 'Nueva Ciudad' }}</h2>
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
-  <label for="nombreCiudad">Nombre:</label>
-  <input id="nombreCiudad" type="text" formControlName="nombreCiudad" placeholder="Nombre de la ciudad" title="Ingresa el nombre de la ciudad" />
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+    <div>
+    <label for="nombreCiudad">Nombre de la ciudad</label>
+    <input id="nombreCiudad" formControlName="nombreCiudad" type="text" />
+    </div>
 
-  <label for="impuestosDeEntradaCiudad">Impuestos de entrada:</label>
-  <input id="impuestosDeEntradaCiudad" type="number" formControlName="impuestosDeEntradaCiudad" placeholder="Ej: 50" title="Impuestos que se deben pagar para entrar a la ciudad" />
+    <div>
+    <label for="impuestosDeEntradaCiudad">Impuestos de entrada</label>
+    <input id="impuestosDeEntradaCiudad" formControlName="impuestosDeEntradaCiudad" type="number" min="0" />
+    </div>
 
-  <label for="productoIds">Productos (IDs separados por coma):</label>
-  <input
-    id="productoIds"
-    placeholder="Ej: 1,2,3"
-    title="IDs de productos disponibles en la ciudad"
-    [value]="form.get('productoIds')?.value?.join(',')"
-    (input)="form.get('productoIds')?.setValue(toNumberArray($any($event.target).value))" />
+    <div>
+      <button type="submit">{{ editar ? 'Actualizar' : 'Crear' }}</button>
+      <button *ngIf="editar" type="button" (click)="eliminar()">Eliminar ciudad</button>
+    </div>
+  </form>
 
-  <label for="servicioIds">Servicios (IDs separados por coma):</label>
-  <input
-    id="servicioIds"
-    placeholder="Ej: 4,5"
-    title="IDs de servicios asociados a la ciudad"
-    [value]="form.get('servicioIds')?.value?.join(',')"
-    (input)="form.get('servicioIds')?.setValue(toNumberArray($any($event.target).value))" />
+  <!-- Solo se muestran los detalles adicionales si estás editando -->
+  <div *ngIf="editar">
+    <!-- Productos -->
+    <h3>Productos disponibles</h3>
+    <ul>
+      <li *ngFor="let p of ciudad.productos">
+        {{ p.nombreProducto }} (Stock: {{ p.stockProducto }})
+        <input type="number" [(ngModel)]="nuevoStock[p.productoId]" placeholder="Nuevo stock" min="0" />
+        <button (click)="actualizarStock(p.productoId)">Actualizar</button>
+        <button (click)="eliminarProducto(p.productoId)">Eliminar</button>
+      </li>
+    </ul>
 
-  <label for="rutaIds">Rutas (IDs separados por coma):</label>
-  <input
-    id="rutaIds"
-    placeholder="Ej: 10,11"
-    title="IDs de rutas que conectan esta ciudad"
-    [value]="form.get('rutaIds')?.value?.join(',')"
-    (input)="form.get('rutaIds')?.setValue(toNumberArray($any($event.target).value))" />
+    <h3>Agregar producto</h3>
+    <select [(ngModel)]="nuevoProductoId" name="productoId" title="Producto a agregar">
+      <option [ngValue]="0">-- Selecciona un producto --</option>
+      <option *ngFor="let p of productosTotales" [ngValue]="p.id">
+        {{ p.nombreProducto }}
+      </option>
+    </select>
+    <input type="number" [(ngModel)]="stockNuevoProducto" placeholder="Stock" min="1" />
+    <button (click)="agregarProducto()">Agregar producto</button>
 
-  <button type="submit">Guardar</button>
-</form>
+    <!-- Servicios -->
+    <h3>Servicios asociados a la ciudad</h3>
+    <ul>
+      <li *ngFor="let s of ciudad.servicios">
+        {{ s.nombreServicio }} - Precio: {{ s.precio }}
+        <button (click)="eliminarServicio(s.servicioId)">Eliminar</button>
+      </li>
+    </ul>
 
+    <h3>Agregar servicio a la ciudad</h3>
+    <select [(ngModel)]="nuevoServicioId" title="Servicio a agregar">
+      <option [ngValue]="0">-- Selecciona un servicio --</option>
+      <option *ngFor="let s of serviciosDisponibles" [ngValue]="s.id">
+        {{ s.tipoServicio }} - {{ s.precioServicio }}
+      </option>
+    </select>
+    <button (click)="agregarServicio()">Agregar servicio</button>
+
+    <!-- Rutas -->
+    <h3>Rutas</h3>
+    <ul>
+      <li *ngFor="let r of ciudad.rutas">
+        A {{ r.destinoNombre }} - Distancia: {{ r.distancia }} km - {{ r.esSegura ? 'Segura' : 'Peligrosa' }}
+        <button (click)="eliminarRuta(r.rutaId)">Eliminar</button>
+      </li>
+    </ul>
+
+    <h3>Agregar ruta</h3>
+    <input type="number" [(ngModel)]="nuevaRutaId" placeholder="ID de la ruta" title="ID de la ruta a agregar"
+      min="1" />
+    <button (click)="agregarRuta()">Agregar ruta</button>
+
+  </div>
+</div>

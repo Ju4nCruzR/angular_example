@@ -1,21 +1,25 @@
 <h2>{{ editar ? 'Editar Producto' : 'Nuevo Producto' }}</h2>
 
 <form [formGroup]="form" (ngSubmit)="guardar()">
-  <label for="nombreProducto">Nombre:</label>
-  <input id="nombreProducto" type="text" formControlName="nombreProducto" placeholder="Ej: Arroz" />
-
-  <label for="demanda">Factor de demanda:</label>
-  <input id="demanda" type="number" formControlName="factorDemandaProducto" placeholder="Ej: 1.2" />
-
-  <label for="oferta">Factor de oferta:</label>
-  <input id="oferta" type="number" formControlName="factorOfertaProducto" placeholder="Ej: 1.1" />
-
-  <label for="precio">Precio base:</label>
-  <input id="precio" type="number" formControlName="precioBaseProducto" placeholder="Ej: 100" />
-
-  <label for="peso">Peso del producto:</label>
-  <input id="peso" type="number" formControlName="pesoProducto" placeholder="Ej: 2.5" />
-
+  <div>
+    <label for="nombreProducto">Nombre:</label>
+    <input id="nombreProducto" type="text" formControlName="nombreProducto" placeholder="Ej: Arroz" />
+  </div>
+  <div>
+    <label for="demanda">Factor de demanda:</label>
+    <input id="demanda" type="number" formControlName="factorDemandaProducto" placeholder="Ej: 1.2" />
+  </div>
+  <div>
+    <label for="oferta">Factor de oferta:</label>
+    <input id="oferta" type="number" formControlName="factorOfertaProducto" placeholder="Ej: 1.1" />
+  </div>
+  <div>
+    <label for="precio">Precio base:</label>
+    <input id="precio" type="number" formControlName="precioBaseProducto" placeholder="Ej: 100" />
+  </div>
+  <div>
+    <label for="peso">Peso del producto:</label>
+    <input id="peso" type="number" formControlName="pesoProducto" placeholder="Ej: 2.5" />
+  </div>
   <button type="submit" [disabled]="form.invalid">Guardar</button>
 </form>
-

@@ -33,4 +33,9 @@ export class ServicioService {
   eliminar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  listarServiciosDisponiblesParaCiudad(ciudadId: number): Observable<ServicioDto[]> {
+    return this.http.get<ServicioDto[]>(`http://localhost:8080/ciudad/${ciudadId}/servicios-disponibles`);
+  }
+  
 }

@@ -6,48 +6,13 @@
 <ul>
   <li *ngFor="let p of ciudad.productos">
     {{ p.nombreProducto }} (Stock: {{ p.stockProducto }})
-    <label [for]="'nuevoStock-' + p.id" class="visually-hidden">Nuevo stock para {{ p.nombreProducto }}</label>
-    <input
-      [id]="'nuevoStock-' + p.id"
-      type="number"
-      [(ngModel)]="nuevoStock[p.id]"
-      placeholder="Nuevo stock"
-      title="Nuevo stock para {{ p.nombreProducto }}"
-      min="1"
-    />
-    <button (click)="actualizarStock(p.id)">Actualizar</button>
-    <button (click)="eliminarProducto(p.productoId)">Eliminar</button>
   </li>
 </ul>
 
-<h3>Agregar producto</h3>
-<label for="nuevoProductoId">Producto:</label>
-<select id="nuevoProductoId" [(ngModel)]="nuevoProductoId" name="nuevoProductoId">
-  <option [ngValue]="0">-- Selecciona un producto --</option>
-  <option *ngFor="let p of productosTotales" [ngValue]="p.id">
-    {{ p.nombreProducto }}
-  </option>
-</select>
-
-<label for="stockNuevoProducto">Stock:</label>
-<input
-  id="stockNuevoProducto"
-  type="number"
-  [(ngModel)]="stockNuevoProducto"
-  placeholder="Stock"
-  title="Cantidad de stock para el producto"
-  min="1"
-/>
-
-<button (click)="agregarProducto()">Agregar producto</button>
-
-
-<h3>Servicios disponibles</h3>
+<h3>Servicios asociados a la ciudad</h3>
 <ul>
   <li *ngFor="let s of ciudad.servicios">
     {{ s.nombreServicio }} - Precio: {{ s.precio }}
-    <button *ngIf="!s.adquirido" (click)="adquirirServicio(s.id)">Adquirir</button>
-    <button (click)="eliminarServicio(s.id)">Eliminar</button>
   </li>
 </ul>
 
@@ -55,19 +20,6 @@
 <ul>
   <li *ngFor="let r of ciudad.rutas">
     A {{ r.destinoNombre }} - Distancia: {{ r.distancia }} km - {{ r.esSegura ? 'Segura' : 'Peligrosa' }}
-    <button (click)="eliminarRuta(r.id)">Eliminar</button>
   </li>
 </ul>
-
-<h3>Agregar ruta</h3>
-<label for="nuevaRutaId" class="visually-hidden">ID de la ruta</label>
-<input
-  id="nuevaRutaId"
-  type="number"
-  [(ngModel)]="nuevaRutaId"
-  placeholder="ID ruta"
-  title="ID de la ruta a agregar"
-  min="1"
-/>
-<button (click)="agregarRuta()">Agregar ruta</button>
 </div>

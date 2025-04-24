@@ -33,7 +33,7 @@ export const routes: Routes = [
   {
     path: 'ciudad/:id/editar',
     loadComponent: () => import('./ciudad/ciudad-form/ciudad-form.component').then(m => m.CiudadFormComponent)
-  },
+  },  
 
    // 🔷 Producto
    {

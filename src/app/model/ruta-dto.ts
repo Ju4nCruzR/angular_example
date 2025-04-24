@@ -1,10 +1,8 @@
 export interface RutaDto {
-    id: number;
-    ciudadOrigenId: number;
-    nombreCiudadOrigen: string;
-    ciudadDestinoId: number;
-    nombreCiudadDestino: string;
-    distanciaRuta: number;
-    segura: boolean;
-  }
-  
+  id: number;
+  origen: string;
+  destino: string;
+  distanciaRuta: number;
+  esSeguraRuta: boolean;
+  danoRuta: number;
+}

@@ -18,6 +18,7 @@ export class CiudadListComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.listar().subscribe(data => this.ciudades = data);
+    this.cargarCiudades();
   }
 
   ver(id: number): void {
@@ -29,19 +30,28 @@ export class CiudadListComponent implements OnInit {
   }
 
   eliminar(id: number): void {
-    if (confirm('¿Eliminar esta ciudad?')) {
-      this.service.eliminar(id).subscribe(() => {
-        alert('Eliminada');
-        this.ngOnInit(); // recarga toda la lista de ciudades
+    if (confirm('¿Estás seguro de que deseas eliminar esta ciudad?')) {
+      this.service.eliminarCiudad(id).subscribe({
+        next: () => {
+          console.log('✅ Ciudad eliminada correctamente.');
+          this.cargarCiudades();
+        },
+        error: (error) => {
+          console.error('❌ Error al eliminar ciudad:', error);
+        }
       });
     }
   }
   
-  
-  
-
   nueva(): void {
     this.router.navigate(['/ciudad/nueva']);
   }
+
+  cargarCiudades(): void {
+    this.service.listar().subscribe(data => {
+      this.ciudades = data;
+    });
+  }
+  
 }
 
