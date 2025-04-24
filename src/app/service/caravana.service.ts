@@ -37,10 +37,10 @@ export class CaravanaService {
     return this.http.delete<void>(`${this.apiUrl}/${id}/eliminar`);
   }
 
-  moverCaravana(id: number, ciudadId: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/mover?ciudadId=${ciudadId}`, {});
+  moverCaravana(id: number, ciudadId: number): Observable<CaravanaDto> {
+    return this.http.post<CaravanaDto>(`${this.apiUrl}/${id}/mover?ciudadId=${ciudadId}`, {});
   }
-
+  
   comprar(dto: CaravanaCompraDto): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/${dto.caravanaId}/comprar?productoId=${dto.productoId}&cantidad=${dto.cantidad}`, {});
   }
@@ -73,6 +73,10 @@ export class CaravanaService {
   crearProductoEnCaravana(caravanaId: number, productoId: number, stock: number): Observable<void> {
     return this.http.post<void>(`${this.apiProductoUrl}/crear?caravanaId=${caravanaId}&productoId=${productoId}&stock=${stock}`, {});
   }
+
+  eliminarProductoDeCaravana(caravanaId: number, productoId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiProductoUrl}/${caravanaId}/producto/${productoId}/eliminar`);
+  }  
 
   listarTodosProductos(): Observable<CaravanaProductoDto[]> {
     return this.http.get<CaravanaProductoDto[]>(`${this.apiProductoUrl}/list`);

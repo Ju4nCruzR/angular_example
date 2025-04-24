@@ -70,4 +70,16 @@ crearRuta(ciudadId: number, rutaId: number): Observable<void> {
   return this.http.post<void>(`${this.apiRutaUrl}?ciudadId=${ciudadId}&rutaId=${rutaId}`, {});
 }
 
+listarProductosDisponiblesPorCiudad(ciudadId: number): Observable<CiudadProductoDto[]> {
+  return this.http.get<CiudadProductoDto[]>(`http://localhost:8080/ciudad/${ciudadId}/productos`);
+}
+
+moverCaravana(id: number, ciudadId: number): Observable<void> {
+  return this.http.post<void>(`${this.apiUrl}/${id}/mover?ciudadId=${ciudadId}`, {});
+}
+
+listarDestinos(ciudadOrigenId: number): Observable<CiudadDto[]> {
+  return this.http.get<CiudadDto[]>(`${this.apiUrl}/${ciudadOrigenId}/destinos`);
+}
+
 }

@@ -13,6 +13,9 @@ import { CaravanaVentaDto } from '../../model/caravana-venta-dto';
 import { CaravanaProductoDto } from '../../model/caravana-producto-dto';
 import { ServicioDto } from '../../model/servicio-dto';
 import { ServicioAplicadoDto } from '../../model/servicio-aplicado-dto';
+import { CiudadDto } from '../../model/ciudad-dto';
+import { CiudadProductoDto } from '../../model/ciudad-producto-dto';
+
 
 @Component({
   selector: 'app-caravana-detail',
@@ -28,6 +31,9 @@ export class CaravanaDetailComponent implements OnInit {
   caravana!: CaravanaDto;
   productosDisponibles: CaravanaProductoDto[] = [];
   serviciosDisponibles: ServicioDto[] = [];
+  ciudadesDisponibles: CiudadDto[] = [];
+  productosEnCiudadActual: CiudadProductoDto[] = [];
+  productosEnCaravana: CaravanaProductoDto[] = [];
 
   productoId: number = 0;
   cantidad: number = 1;
@@ -39,6 +45,7 @@ export class CaravanaDetailComponent implements OnInit {
 
   mensaje: string = '';
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,16 +55,48 @@ export class CaravanaDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('🟠 ngOnInit cargado');
     const id = Number(this.route.snapshot.paramMap.get('id'));
-  
+
     this.caravanaService.obtener(id).subscribe({
       next: data => {
+        console.log('📦 Datos completos de la caravana recibida:', data);
         this.caravanaDetalle = data;
         this.caravana = data.caravana;
-        this.cargarProductosDisponibles();
-  
-        this.servicioService.listar().subscribe(servicios => {
+
+        const ciudadIdActual = data.caravana.ciudadId;
+        console.log('🟡 ciudadIdActual:', ciudadIdActual);
+
+        const caravanaId = data.caravana.id;
+
+
+        // ✅ Productos disponibles para comprar (de la ciudad actual)
+        if (ciudadIdActual != null) {
+          this.ciudadService.listarProductosDisponiblesPorCiudad(ciudadIdActual).subscribe(
+            (productos: CiudadProductoDto[]) => {
+              console.log('🟢 Productos en ciudad actual recibidos:', productos);
+              this.productosEnCiudadActual = productos;
+            }
+          );
+        }
+
+        // ✅ Productos disponibles para vender (que están en la caravana)
+        if (caravanaId != null) {
+          this.caravanaService.listarProductosPorCaravana(caravanaId).subscribe(
+            (productos: CaravanaProductoDto[]) => {
+              this.productosEnCaravana = productos;
+            }
+          );
+        }
+
+        // Servicios
+        this.servicioService.listar().subscribe((servicios: ServicioDto[]) => {
           this.serviciosDisponibles = servicios;
+        });
+
+        // Ciudades
+        this.ciudadService.listarDestinos(ciudadIdActual).subscribe((ciudades: CiudadDto[]) => {
+          this.ciudadesDisponibles = ciudades;
         });
       },
       error: err => {
@@ -65,7 +104,7 @@ export class CaravanaDetailComponent implements OnInit {
         this.router.navigate(['/caravana']);
       }
     });
-  }  
+  }
 
   cargarCaravana(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -84,8 +123,10 @@ export class CaravanaDetailComponent implements OnInit {
   }
 
   mover(): void {
-    this.caravanaService.moverCaravana(this.caravana.id, this.ciudadId).subscribe(() => {
-      this.cargarCaravana();
+    console.log('🌍 ciudadId seleccionada para mover:', this.ciudadId);
+    this.caravanaService.moverCaravana(this.caravana.id, this.ciudadId).subscribe((dto) => {
+      this.caravana.nombreCiudadActual = dto.nombreCiudadActual; // para mostrarlo en pantalla
+      this.cargarCaravana(); // para refrescar productos, rutas, etc.
     });
   }
 
@@ -120,7 +161,6 @@ export class CaravanaDetailComponent implements OnInit {
       }
     });
   }
-
 
   vender(): void {
     const cantidadVendida = this.cantidad;
@@ -157,49 +197,49 @@ export class CaravanaDetailComponent implements OnInit {
   get nombreProductoSeleccionado(): string {
     const producto = this.caravanaDetalle.productos.find(p => p.productoId === this.productoId)
       ?? this.productosDisponibles.find(p => p.productoId === this.productoId);
-  
+
     if (!producto) {
       return '❌ Producto no disponible en esta ciudad.';
     }
-  
+
     return `✅ ${producto.nombreProducto}`;
   }
-  
+
   get nombreServicioSeleccionado(): string {
     const servicio = this.serviciosDisponibles.find((s: ServicioDto) => s.id === this.servicioId);
-  
+
     if (!servicio) {
       return '❌ Servicio no disponible.';
     }
-  
+
     const yaAplicado = this.caravanaDetalle.serviciosAplicados?.some(
       (s: ServicioAplicadoDto) => s.tipoServicio === servicio.tipoServicio
     );
-  
+
     if (yaAplicado) {
       return `⚠️ ${servicio.tipoServicio} (ya aplicado)`;
     }
-  
+
     return `✅ ${servicio.tipoServicio}`;
   }
-  
+
   aplicarServicio(): void {
     const servicio = this.serviciosDisponibles.find(s => s.id === this.servicioId);
-  
+
     if (!servicio) {
       this.mensaje = '❌ Servicio no válido.';
       return;
     }
-  
+
     const yaAplicado = this.caravanaDetalle.serviciosAplicados?.some(
       s => s.tipoServicio === servicio.tipoServicio
     );
-  
+
     if (yaAplicado) {
       this.mensaje = `⚠️ El servicio "${servicio.tipoServicio}" ya fue aplicado.`;
       return;
     }
-  
+
     this.caravanaService.aplicarServicio(this.caravana.id, this.servicioId).subscribe({
       next: () => {
         this.cargarCaravana();
@@ -209,8 +249,8 @@ export class CaravanaDetailComponent implements OnInit {
         this.mensaje = error?.error?.detalle ?? '❌ No se pudo aplicar el servicio.';
       }
     });
-  } 
-  
+  }
+
   actualizarStock(productoId: number): void {
     const producto = this.caravanaDetalle.productos.find(p => p.id === productoId);
     if (producto) {
@@ -238,4 +278,5 @@ export class CaravanaDetailComponent implements OnInit {
       this.cargarCaravana();
     });
   }
+
 }

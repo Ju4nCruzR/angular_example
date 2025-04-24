@@ -15,51 +15,91 @@
     </li>
   </ul>
 
-<h3>Jugadores en la Caravana</h3>
-<ul>
-  <li *ngFor="let j of caravanaDetalle.jugadores">
-    {{ j.nombreJugador }}
-  </li>
-</ul>
+  <h3>Jugadores en la Caravana</h3>
+  <ul>
+    <li *ngFor="let j of caravanaDetalle.jugadores">
+      {{ j.nombreJugador }}
+    </li>
+  </ul>
 
-<h3>Mover caravana</h3>
-<table>
-  <tr>
-    <td><label for="ciudadId">Ciudad destino ID:</label></td>
-    <td><input id="ciudadId" type="number" [(ngModel)]="ciudadId" min="1"  /></td>
-    <td><button (click)="mover()">Mover</button></td>
-  </tr>
-</table>
-
-  <h3>Comprar / Vender</h3>
+  <h3>Mover caravana</h3>
   <table>
     <tr>
-      <td><label for="productoId">ID producto:</label></td>
-      <td><input id="productoId" type="number" [(ngModel)]="productoId" min="1" /></td>
+      <td><label for="ciudadId">Ciudad destino:</label></td>
+      <td>
+        <select [(ngModel)]="ciudadId" name="ciudadId" id="ciudadId">
+          <option [ngValue]="0">-- Selecciona una ciudad --</option>
+          <option *ngFor="let c of ciudadesDisponibles" [ngValue]="c.id">
+            {{ c.nombreCiudad }}
+          </option>
+        </select>
+      </td>
+      <td><button (click)="mover()">Mover</button></td>
+    </tr>
+  </table>
+
+  <h3>Comprar</h3>
+  <table>
+    <tr>
+      <td><label for="productoIdCompra">Producto:</label></td>
+      <td>
+        <select [(ngModel)]="productoId" name="productoIdCompra" id="productoIdCompra">
+          <option [ngValue]="0">-- Selecciona un producto para comprar --</option>
+          <option *ngFor="let p of productosEnCiudadActual" [ngValue]="p.productoId">
+            Producto: {{ p.nombreProducto }} - (Stock: {{ p.stockProducto }})
+          </option>
+        </select>      
+      </td>
       <td *ngIf="nombreProductoSeleccionado">
         <small><strong>Producto:</strong> {{ nombreProductoSeleccionado }}</small>
       </td>
     </tr>
     <tr>
-      <td><label for="cantidad">Cantidad:</label></td>
-      <td><input id="cantidad" type="number" [(ngModel)]="cantidad" min="1"/></td>
-      <td>
-        <button (click)="comprar()">Comprar</button>
-        <button (click)="vender()">Vender</button>
-      </td>
+      <td><label for="cantidadCompra">Cantidad:</label></td>
+      <td><input id="cantidadCompra" type="number" [(ngModel)]="cantidad" min="1" /></td>
+      <td><button (click)="comprar()">Comprar</button></td>
     </tr>
   </table>  
+
+<h3>Vender</h3>
+<table>
+  <tr>
+    <td><label for="productoIdVenta">Producto:</label></td>
+    <td>
+      <select [(ngModel)]="productoId" name="productoIdVenta" id="productoIdVenta">
+        <option [ngValue]="0">-- Selecciona un producto para vender --</option>
+        <option *ngFor="let p of productosEnCaravana" [ngValue]="p.productoId">
+          {{ p.nombreProducto }}
+        </option>
+      </select>
+    </td>
+    <td *ngIf="nombreProductoSeleccionado">
+      <small><strong>Producto:</strong> {{ nombreProductoSeleccionado }}</small>
+    </td>
+  </tr>
+  <tr>
+    <td><label for="cantidadVenta">Cantidad:</label></td>
+    <td><input id="cantidadVenta" type="number" [(ngModel)]="cantidad" min="1" /></td>
+    <td><button (click)="vender()">Vender</button></td>
+  </tr>
+</table> 
 
   <h3>Aplicar servicio a la Caravana</h3>
   <table>
     <tr>
-      <td><label for="servicioId">ID servicio:</label></td>
-      <td><input id="servicioId" type="number" [(ngModel)]="servicioId" min="1" /></td>
-      <div *ngIf="nombreServicioSeleccionado">
+      <td><label for="servicioId">Servicio:</label></td>
+      <td>
+        <select [(ngModel)]="servicioId" name="servicioId" id="servicioId">
+          <option [ngValue]="0">-- Selecciona un servicio --</option>
+          <option *ngFor="let s of serviciosDisponibles" [ngValue]="s.id">
+            {{ s.tipoServicio }}
+          </option>
+        </select>
+      </td>
+      <td *ngIf="nombreServicioSeleccionado">
         <small><strong>Servicio:</strong> {{ nombreServicioSeleccionado }}</small>
-      </div>      
+      </td>
       <td><button (click)="aplicarServicio()">Aplicar</button></td>
     </tr>
   </table>
-  
-  
+</div>

@@ -1,24 +1,82 @@
 <h2>{{ editar ? 'Editar Caravana' : 'Nueva Caravana' }}</h2>
 
 <form [formGroup]="form" (ngSubmit)="guardar()">
-  <label for="nombreCaravana">Nombre:</label>
-  <input id="nombreCaravana" type="text" formControlName="nombreCaravana" placeholder="Nombre de la caravana" title="Ingresa el nombre de la caravana" />
+  <div>
+    <label>Nombre:</label>
+    <input formControlName="nombreCaravana" placeholder="Ej: Caravana del norte" title="Nombre de la caravana" />
+  </div>
 
-  <label for="velocidadCaravana">Velocidad:</label>
-  <input id="velocidadCaravana" type="number" formControlName="velocidadCaravana" placeholder="Ej: 10" title="Velocidad base de la caravana" />
+  <div>
+    <label>Velocidad:</label>
+    <input type="number" formControlName="velocidadCaravana" placeholder="Ej: 10" title="Velocidad de la caravana" />
+  </div>
 
-  <label for="capacidadMaximaCargaCaravana">Capacidad de carga:</label>
-  <input id="capacidadMaximaCargaCaravana" type="number" formControlName="capacidadMaximaCargaCaravana" placeholder="Ej: 100" title="Peso máximo que puede cargar la caravana" />
+  <div>
+    <label>Capacidad máxima de carga:</label>
+    <input type="number" formControlName="capacidadMaximaCargaCaravana" placeholder="Ej: 100" title="Capacidad máxima de carga" />
+  </div>
 
-  <label for="dineroDisponibleCaravana">Dinero:</label>
-  <input id="dineroDisponibleCaravana" type="number" formControlName="dineroDisponibleCaravana" placeholder="Ej: 500" title="Dinero disponible en la caravana" />
+  <div>
+    <label>Dinero disponible:</label>
+    <input type="number" formControlName="dineroDisponibleCaravana" placeholder="Ej: 500" title="Dinero disponible" />
+  </div>
 
-  <label for="puntosDeVidaCaravana">Puntos de vida:</label>
-  <input id="puntosDeVidaCaravana" type="number" formControlName="puntosDeVidaCaravana" placeholder="Ej: 100" title="Puntos de vida de la caravana" />
+  <div>
+    <label>Puntos de vida:</label>
+    <input type="number" formControlName="puntosDeVidaCaravana" placeholder="Ej: 5" title="Puntos de vida" />
+  </div>
 
-  <label for="ciudadId">Ciudad ID:</label>
-  <input id="ciudadId" type="number" formControlName="ciudadId" placeholder="Ej: 3" title="ID de la ciudad actual de la caravana" />
+  <div>
+    <label>ID Ciudad:</label>
+    <input type="number" formControlName="ciudadId" placeholder="Ej: 2" title="ID de la ciudad de inicio" />
+  </div>
 
-  <button type="submit">Guardar</button>
+  <div>
+    <button type="submit">{{ editar ? 'Actualizar' : 'Crear' }}</button>
+    <button type="button" *ngIf="editar" (click)="eliminar()">Eliminar caravana</button>
+  </div>
 </form>
+
+<hr *ngIf="editar" />
+
+<!-- Sección para agregar productos solo si estamos en modo edición -->
+<div *ngIf="editar">
+  <h3>Agregar producto a la caravana</h3>
+  <table>
+    <tr>
+      <td><label for="productoId">ID producto:</label></td>
+      <td>
+        <select [(ngModel)]="nuevoProductoId" name="productoId" id="productoId">
+          <option [ngValue]="0">-- Selecciona un producto --</option>
+          <option *ngFor="let p of productosParaAgregar" [ngValue]="p.productoId">
+            {{ p.nombreProducto }}
+          </option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="nuevoStock">Stock:</label></td>
+      <td><input id="nuevoStock" type="number" [(ngModel)]="nuevoStock" name="nuevoStock" /></td>
+      <td><button (click)="agregarProducto()">Agregar producto</button></td>
+    </tr>
+  </table>
+
+  <h3>Productos actuales en la caravana</h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Stock</th>
+      <th>Acción</th>
+    </tr>
+    <tr *ngFor="let p of productosEnCaravana">
+      <td>{{ p.productoId }}</td>
+      <td>{{ p.nombreProducto }}</td>
+      <td>{{ p.stockEnCaravana }}</td>
+      <td>
+        <button (click)="eliminarProducto(p.productoId)">Eliminar</button>
+      </td>
+    </tr>
+  </table>
+</div>
 
