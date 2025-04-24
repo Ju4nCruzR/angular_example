@@ -1,5 +1,7 @@
 export interface JugadorDto {
   id: number;
   nombreJugador: string;
-  rolJugador: string;
+  rolJugador: 'COMERCIANTE' | 'CARAVANERO';
+  caravanaId: number;
+  nombreCaravana: string;
 }

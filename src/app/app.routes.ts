@@ -33,10 +33,10 @@ export const routes: Routes = [
   {
     path: 'ciudad/:id/editar',
     loadComponent: () => import('./ciudad/ciudad-form/ciudad-form.component').then(m => m.CiudadFormComponent)
-  },  
+  },
 
-   // 🔷 Producto
-   {
+  // 🔷 Producto
+  {
     path: 'productos',
     loadComponent: () => import('./producto/producto-list/producto-list.component').then(m => m.ProductoListComponent)
   },
@@ -71,23 +71,41 @@ export const routes: Routes = [
     loadComponent: () => import('./servicio/servicio-form/servicio-form.component').then(m => m.ServicioFormComponent)
   },
 
-    // 🔷 Rutas
-    {
-      path: 'rutas',
-      loadComponent: () => import('./ruta/ruta-list/ruta-list.component').then(m => m.RutaListComponent)
-    },
-    {
-      path: 'ruta/nueva',
-      loadComponent: () => import('./ruta/ruta-form/ruta-form.component').then(m => m.RutaFormComponent)
-    },
-    {
-      path: 'ruta/:id',
-      loadComponent: () => import('./ruta/ruta-detail/ruta-detail.component').then(m => m.RutaDetailComponent)
-    },
-    {
-      path: 'ruta/:id/editar',
-      loadComponent: () => import('./ruta/ruta-form/ruta-form.component').then(m => m.RutaFormComponent)
-    },      
+  // 🔷 Rutas
+  {
+    path: 'rutas',
+    loadComponent: () => import('./ruta/ruta-list/ruta-list.component').then(m => m.RutaListComponent)
+  },
+  {
+    path: 'ruta/nueva',
+    loadComponent: () => import('./ruta/ruta-form/ruta-form.component').then(m => m.RutaFormComponent)
+  },
+  {
+    path: 'ruta/:id',
+    loadComponent: () => import('./ruta/ruta-detail/ruta-detail.component').then(m => m.RutaDetailComponent)
+  },
+  {
+    path: 'ruta/:id/editar',
+    loadComponent: () => import('./ruta/ruta-form/ruta-form.component').then(m => m.RutaFormComponent)
+  },
+
+  {
+    path: 'jugadores',
+    loadComponent: () => import('./jugador/jugador-list/jugador-list.component').then(m => m.JugadorListComponent)
+  },
+  {
+    path: 'jugador/nuevo',
+    loadComponent: () => import('./jugador/jugador-form/jugador-form.component').then(m => m.JugadorFormComponent)
+  },
+  {
+    path: 'jugador/:id',
+    loadComponent: () => import('./jugador/jugador-detail/jugador-detail.component').then(m => m.JugadorDetailComponent)
+  },
+  {
+    path: 'jugador/:id/editar',
+    loadComponent: () => import('./jugador/jugador-form/jugador-form.component').then(m => m.JugadorFormComponent)
+  },
+  
 
   { path: '**', redirectTo: 'caravanas' }
 ];

@@ -1,0 +1,29 @@
+<h2>{{ modoEdicion ? 'Editar' : 'Nuevo' }} Jugador</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <label>
+    Nombre del jugador:
+    <input formControlName="nombreJugador" />
+  </label>
+  <br />
+
+  <label>
+    Rol:
+    <select formControlName="rolJugador">
+      <option value="" disabled>Seleccione un rol</option>
+      <option value="COMERCIANTE">COMERCIANTE</option>
+      <option value="CARAVANERO">CARAVANERO</option>
+    </select>
+  </label>
+  <br />
+
+  <label>
+    Caravana (ID):
+    <input formControlName="caravanaId" type="number" />
+  </label>
+  <br />
+
+  <button type="submit" [disabled]="form.invalid">
+    {{ modoEdicion ? 'Actualizar' : 'Crear' }}
+  </button>
+</form>

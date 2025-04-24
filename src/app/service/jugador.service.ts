@@ -26,6 +26,16 @@ export class JugadorService {
   }
 
   eliminar(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`http://localhost:8080/jugador/${id}`);
   }
+  
+
+  ver(id: number): Observable<JugadorDto> {
+    return this.http.get<JugadorDto>(`http://localhost:8080/jugador/${id}`);
+  }
+
+  editar(id: number, dto: JugadorDto): Observable<void> {
+    return this.http.put<void>(`http://localhost:8080/jugador/${id}`, dto);
+  }
+  
 }

@@ -1,0 +1,8 @@
+<div *ngIf="jugador">
+    <h2>Detalle del Jugador</h2>
+    <p><strong>ID:</strong> {{ jugador.id }}</p>
+    <p><strong>Nombre:</strong> {{ jugador.nombreJugador }}</p>
+    <p><strong>Rol:</strong> {{ jugador.rolJugador }}</p>
+    <p><strong>Caravana:</strong> {{ jugador.nombreCaravana || 'Sin asignar' }}</p>
+  </div>
+  
