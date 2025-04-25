@@ -8,6 +8,7 @@ import { ServicioDto } from '../../model/servicio-dto';
   selector: 'app-servicio-list',
   standalone: true,
   templateUrl: './servicio-list.component.html',
+  styleUrls: ['./servicio-list.component.css'],
   imports: [CommonModule, RouterModule]
 })
 export class ServicioListComponent implements OnInit {

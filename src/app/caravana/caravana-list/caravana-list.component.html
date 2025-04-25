@@ -1,11 +1,27 @@
-<h2>Lista de Caravanas</h2>
-<button (click)="nuevaCaravana()">+ Nueva</button>
+<div class="caravana-leaderboard">
+  <div class="leaderboard-titulo">
+    <span>🐴 CARAVANAS 🐴 </span>
+  </div>
 
-<ul>
-  <li *ngFor="let c of caravanas">
-    {{ c.nombreCaravana }} ({{ c.nombreCiudadActual }})
-    <button (click)="verDetalle(c.id)">Ver</button>
-    <button (click)="editar(c.id)">Editar</button>
-    <button (click)="eliminar(c.id)">Eliminar</button>
-  </li>
-</ul>
+  <div class="leaderboard-encabezado">
+    <span>#</span>
+    <span>Nombre</span>
+    <span>Ciudad</span>
+    <span>Acciones</span>
+  </div>
+
+  <div class="leaderboard-fila" *ngFor="let c of caravanas; let i = index">
+    <span>{{ i + 1 }}</span>
+    <span>{{ c.nombreCaravana }}</span>
+    <span>{{ c.nombreCiudadActual }}</span>
+    <span class="acciones">
+      <button class="boton-leader" (click)="verDetalle(c.id)">ver</button>
+      <button class="boton-leader" (click)="editar(c.id)">editar</button>
+      <button class="boton-leader" (click)="eliminar(c.id)">borrar</button>
+    </span>
+  </div>
+
+  <div class="nueva-caravana">
+    <button class="boton-nueva" (click)="nuevaCaravana()">+ Nueva Caravana</button>
+  </div>
+</div>

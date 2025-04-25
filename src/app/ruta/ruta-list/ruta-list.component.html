@@ -1,16 +1,30 @@
-<h2>Lista de Rutas</h2>
-<button (click)="nueva()">+ Nueva Ruta</button>
+<div class="caravana-leaderboard">
+  <div class="leaderboard-titulo">
+    🗺️ RUTAS 🗺️
+  </div>
 
-<ul>
-  <li *ngFor="let r of rutas">
-    {{ r.origen }} → {{ r.destino }}
-    (Distancia: {{ r.distanciaRuta }} km, {{ r.esSeguraRuta ? 'Segura' : 'Peligrosa' }})
-  
-    <button (click)="ver(r.id)">Ver</button>
-    <button (click)="editar(r.id)">Editar</button>
-    <button (click)="eliminar(r.id)">Eliminar</button>
-  </li>  
-</ul>
->
+  <div class="leaderboard-encabezado">
+    <span>#</span>
+    <span>Origen → Destino</span>
+    <span>Distancia / Seguridad</span>
+    <span>Acciones</span>
+  </div>
 
+  <div class="leaderboard-fila" *ngFor="let r of rutas; let i = index">
+    <span>{{ i + 1 }}</span>
+    <span>{{ r.origen }} → {{ r.destino }}</span>
+    <span>
+      {{ r.distanciaRuta }} km<br />
+      {{ r.esSeguraRuta ? '🟢 Segura' : '🔴 Peligrosa' }}
+    </span>
+    <span class="acciones">
+      <button class="boton-leader" (click)="ver(r.id)">Ver</button>
+      <button class="boton-leader" (click)="editar(r.id)">Editar</button>
+      <button class="boton-leader" (click)="eliminar(r.id)">Eliminar</button>
+    </span>
+  </div>
 
+  <div class="nueva-caravana">
+    <button class="boton-nueva" (click)="nueva()">+ Nueva Ruta</button>
+  </div>
+</div>
